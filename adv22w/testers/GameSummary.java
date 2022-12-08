@@ -1,4 +1,4 @@
-package testers;
+package adv22w.testers;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤ */
 
 import adv22w.api.IGame;

@@ -1,7 +1,7 @@
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package testers;
+package adv22w.testers;
 
 
 import adv22w.api.TypeOfScenario;

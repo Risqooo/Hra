@@ -1,7 +1,7 @@
 /* The file is saved in UTF-8 codepage.
  * Check: «Stereotype», Section mark-§, Copyright-©, Alpha-α, Beta-β, Smile-☺
  */
-package testers;
+package adv22w.testers;
 
 import adv22w.api.IGame;
 import adv22w.api.IPortal;
