@@ -1,4 +1,4 @@
-package api;
+package adv22w.api;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤ */
 
 import java.util.Collection;
