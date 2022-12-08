@@ -1,4 +1,4 @@
-package test_ver;
+package adv22w.test_ver;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤ */
 
 import adv22w.api.IPortal;
