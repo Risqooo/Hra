@@ -33,8 +33,8 @@ public   class CK_Game
 
     /** Přepravka s názvy povinných akcí. */
     private static final BasicActions BASIC_ACTIONS =
-                     new BasicActions("Jdi", "Vezmi", "Polož",
-                                      "?",   "Konec");
+                     new BasicActions("Choď", "Vezmi", "Polož",
+                                      "?",   "Koniec");
 
 
 

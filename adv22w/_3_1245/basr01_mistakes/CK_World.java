@@ -93,27 +93,50 @@ public   class CK_World
     private CK_World()
     {
         places = new ArrayList<>();
+        //Opis priestoru Zeľuvarenije
         places.add(startPlace =
-                   new CK_Place("Domeček",
-                       "Domeček, kde bydlí Karkulka",
-                       new String[] { "Les" },
-                       "_Bábovka", "_Víno", "#Stůl", "_Panenka"));
-        places.add(new CK_Place("Les",
-                       "Les s jahodami, malinami a pramenem vody",
-                       new String[] { "Domeček", "Temný_les" },
-                       "_Maliny", "_Jahody", "#Studánka"));
-        places.add(new CK_Place("Temný_les",
-                       "Temný_les s jeskyní a číhajícím vlkem",
-                       new String[] { "Les", "Jeskyně", "Chaloupka"},
-                       "#Vlk"));
-        places.add(new CK_Place("Chaloupka",
-                       "Chaloupka, kde bydlí babička",
-                       new String[] { "Temný_les" },
-                       "#Postel", "#Stůl", "#Babička"));
-        places.add(new CK_Place("Jeskyně",
-                       "Jeskyně, kde v zimě přespává medvěd",
-                       new String[] { "Temný_les" }
+                   new CK_Place("Zeľuvarenije",
+                       "Obchod kde Černokňažník obsluhuje pocestných",
+                       new String[] { "Varňa", "Dommosklo" },
+                       "Pocestný", "Pokladňa", "Pohár", "Pult", "Stolička"));
+        //Opis priestoru Dommosklo
+        places.add(new CK_Place("Dommosklo",
+                        """
+                                Skleník v ktorom rastú: 
+                                Zamiokulkas, Lopatkovec, Smíchovenec,
+                                Afrikule a Šachamašmak
+                                """,
+                       new String[] { "Varňa", "Zeľuvarenije" },
+                        "Zamiokulkas", "Lopatkovec",
+                        "Smíchovenec", "Afrikule", "Šachamašmak"));
+        //Opis priestoru Varňa
+        places.add(new CK_Place("Varňa",
+                        """
+                        Varňa v ktorej Černokňažník varí lektvary.
+                        Nachádza sa tu Kotlík, Špajza a Studňa.
+                        """,
+                       new String[] { "Dommosklo", "Zeľuvarenije",
+                                    "Kotlík", "Špajza", "Studňa"},
+                       "Kotlík", "Špajza", "Studňa"));
+        //Opis priestoru Špajza
+        places.add(new CK_Place("Špajza",
+                        """
+                        Špajza v ktorej sa nachádzajú vysušené ingrediencie:
+                        Dračígrc, Okomlok, Šalvia, Stromohnát a Rumbagule.
+                        """,
+                       new String[] { "Varňa" },
+                        "Dračígrc", "Okomlok", "Šalvia",
+                        "Stromohnát", "Rumbagule"));
+        //Opis priestoru Studňa
+        places.add(new CK_Place("Studňa",
+                       "Môžeš tu nabrať čistú vodu",
+                       new String[] { "Varňa" }
                        /* nic */ ));
+        //Opis priestoru Kotlík
+        places.add(new CK_Place("Kotlík",
+                "Tu daj všetky ingrediencie a zamiešaj ich.",
+                new String[] { "Varňa" }
+                /* nic */ ));
         allPlaces = Collections.unmodifiableCollection(places);
     }
 

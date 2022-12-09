@@ -106,11 +106,13 @@ public class    CK_Action
     {
         CK_World.getInstance().initialize();
         CK_Bag  .getInstance().initialize();
-        conditions.put("living", List.of("babička", "vlk"));
-        conditions.put("babička.sleeping", true);
-        conditions.put("babička.greeted",  false);
-        conditions.put("vlk.sleeping", true);
-        conditions.put("vlk.greeted",  false);
+        conditions.put("living", List.of("Pocestný"));
+        conditions.put("pocestny.pozdraveny", true);
+        conditions.put("notlive", List.of("voda","ohen", "lektvar"));
+        conditions.put("voda.nabrata", false);
+        conditions.put("ohen.zapaleny", false);
+        conditions.put("lektvar.zamiesany", false);
+        conditions.put("lektvar.naservirovany", false);
     }
 
 
@@ -245,8 +247,8 @@ public class    CK_Action
 
 static {
 NAME_2_ACTION = Map.of(
-    "jdi", new CK_Action("Jdi",
-        "Přesune Karkulku do zadaného sousedního prostoru.",
+    "choď", new CK_Action("Choď",
+        "Černokňažník sa presunie do zadaného susedného priestoru.",
         arguments -> {
             if (arguments.length < 2) {
                 return MOVE_WA;
@@ -264,9 +266,11 @@ NAME_2_ACTION = Map.of(
             return GOTO + destinationRoom.description();
         }),
     "vezmi", new CK_Action("Vezmi",
-        "Vezme zadaný předmět a vloží jej do košíku.\n"
-      + "Předmět ale musí být v aktuálním prostoru, musí být přenositelný\n"
-      + "a v košíku pro něj musí být volné místo.",
+        """
+                  Vezme daný predmet a vloží ho do kapsy.
+                  Predmet musí byť v aktuálnom priestore, prenesiteľný,
+                  a v kapse musí byť voľné miesto.
+                  """,
         arguments -> {
             if (arguments.length <2) {
                 return TAKE_WA;
@@ -293,7 +297,7 @@ NAME_2_ACTION = Map.of(
             }
         }),
     "polož", new CK_Action("Polož",
-        "Zadaný předmět z košíku položí v aktuálním prostoru.",
+        "Zadaný predmet z kapsy položí v aktuálnom priestore.",
         arguments -> {
             if (arguments.length < 2) {
                 return PUT_DOWN_WA;
@@ -311,7 +315,7 @@ NAME_2_ACTION = Map.of(
             return PUT_DOWN + item.name();
         }),
     "?", new CK_Action("?",
-        "Zobrazí seznam dostupných akcí spolu s jejich stručnými popisy.",
+        "Zobrazí zoznam dostupných akcií spolu s ich stručnými popismi.",
         arguments -> {
             Collection<CK_Action> actions = allActions();
 //        Collector col = Collectors.joining(
@@ -328,15 +332,17 @@ NAME_2_ACTION = Map.of(
             }
             return sb.toString();
         }),
-    "konec", new CK_Action("Konec",
-        "Předčasné ukončení hry.",
+    "koniec", new CK_Action("Koniec",
+        "Predčasné ukončenie hry.",
         arguments -> {
             CK_Game.getInstance().stop();
             return END;
         }),
-    "probuď", new CK_Action("Probuď",
-        "Karkulka probudí zadaný h-objekt (osobu, zvíře).\n"
-      + "Objekt musí být v aktuálním prostoru a musí spát.",
+    "pozdrav", new CK_Action("Pozdrav",
+        """
+            Černokňažník pozdraví danú osobu v danom priestore.
+            Osoba musí byť v danom priestore a nemôže byť pozdravený.
+            """,
         arguments -> {
             if (arguments.length < 2) {
                 return NS1_0Args;
@@ -354,7 +360,7 @@ NAME_2_ACTION = Map.of(
             if (! ((List)(conditions.get("living"))).contains(name)) {
                 return NS1_WRONG_ARG + item;
             }
-            String cond = name+".sleeping";
+            String cond = name+".pozdraveny";
             if ((Boolean)(conditions.get(cond))) {
                 conditions.put(cond, false);
                 return NS_1 + name;

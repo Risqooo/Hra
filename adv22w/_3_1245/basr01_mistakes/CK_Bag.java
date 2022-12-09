@@ -28,7 +28,7 @@ public   class CK_Bag
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
 
     /** Kapacita batohu. */
-    static final int CAPACITY = 2;
+    static final int CAPACITY = 6;
 
     /** Jediná instance batohu ve hře. */
     private static final CK_Bag SINGLETON = new CK_Bag();
@@ -84,7 +84,7 @@ public   class CK_Bag
     @SuppressWarnings("unchecked")
     CK_Bag()
     {
-        super("Košík");
+        super("Kapsa");
         items = new ArrayList<>();
     }
 

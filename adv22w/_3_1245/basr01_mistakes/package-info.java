@@ -10,5 +10,5 @@
  * @author  Rudolf PECINOVSKÝ
  * @version 2022-Winter
  */
-package adv22w._0_0000.a1g_mistakes;
+package adv22w._3_1245.basr01_mistakes;
 
