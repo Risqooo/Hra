@@ -56,15 +56,15 @@ public abstract class ANamed
     {
         if ((name == null)  ||  name.isEmpty()) {
             throw new IllegalArgumentException(
-                        "\nJako název objektu nesmí být zadán "
-                      + "prázdný odkaz ani prázdný řetězec");
+                        "\nAko názov objektu nesmie byť zadaný "
+                      + "prázdny odkaz ani prázdny reťazec");
         }
         if ((! name.equals(name.trim())  )  ||
             (name.split("\\s").length > 1)  )
         {
             throw new IllegalArgumentException(
-                        "\nNázvy objektů musejí být jednoslovné, "
-                      + "tj. nesmějí obsahovat bílé znaky - Zadáno: «"
+                        "\nNázvy objektov musia býť jednoslovné, "
+                      + "tj. nesmú obsahovať biele znaky - Zadané: «"
                       + name + "»");
         }
         this.name = name;

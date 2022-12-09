@@ -98,7 +98,7 @@ public   class Place
     /***************************************************************************
      * Vrátí kolekci sousedů daného prostoru, tj. kolekci prostorů,
      * do nichž je možno se z tohoto prostoru přesunout příkazem typu
-     * {@link eu.pedu.adv20w.api.TypeOfStep#tsGOTO
+     * //{@link //eu.//pedu.//adv20w.//api.//TypeOfStep#tsGOTO
      * TypeOfStep.tsGOTO}.
      *
      * @return Kolekce sousedů

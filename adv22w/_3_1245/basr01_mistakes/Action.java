@@ -337,7 +337,7 @@ NAME_2_ACTION = Map.of(
         arguments -> {
             Game.getInstance().stop();
             return END;
-        }),
+        }),/*
     "pozdrav", new Action("Pozdrav",
         """
             Černokňažník pozdraví danú osobu v danom priestore.
@@ -367,7 +367,7 @@ NAME_2_ACTION = Map.of(
             }
             return NS1_WrongCond + name;
         }),
-    "pozdrav", new Action("Pozdrav",
+    "pozdrav", new Action("Zapáľ",
         "Karkulka pozdraví. Příkaz je bezparametrický,\n"
       + "ale v aktuálním prostoru musí být probuzený objekt.",
         arguments -> {
@@ -389,21 +389,25 @@ NAME_2_ACTION = Map.of(
             }
             conditions.put(cond, true);
             return NS_0;
-
-        }),
-    "popřej", new Action("Popřej",
-        "Karkulka popřeje k narozeninám. Příkaz je bezparametrický,\n"
-      + "ale v aktuálním prostoru musí být pozdravený h-objekt.",
+        }),*/
+    "naservíruj", new Action("Naservíruj",
+        """
+      Černokňažník naservíruje lektvar. Príkaz je bezparametrický,
+      ale v kapse musí mať lekvar a 
+      v aktuálnom priestore musí být živý h-objekt.""",
         arguments -> {
             World        world = World.getInstance();
             Place currentPlace = world.currentPlace();
             Optional<IItem> oItem = getiItem(currentPlace);
             if (oItem.isEmpty()) {
-                return "V prostoru není nikdo, komu by mělo smysl přát";
+                return """
+                       V priestore nie je nikto,
+                       komu môžeš naservírovať lektvar.
+                       """;
             }
             Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
-            String  cond = name+".greeted";
+            String  cond = name+".naservirovany";
             if ((Boolean)(conditions.get(cond))) {
                 return SUCCESS;
             }

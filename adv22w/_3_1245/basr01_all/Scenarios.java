@@ -45,7 +45,7 @@ Keď budete mať lektvar vychladný vezmite ho z kotlíka.
 Už len zostáva vrátiť sa do obchodu a lektvar naservírovať pocestnému.
 Keď sa nebudete vedieť pohnúť v hre ďalej zadajte znak ?.
 To zobrazí nápovedu.
-Prajeme Vám pekný zážitok z hry.";
+Prajeme Vám pekný zážitok z hry.
 """;
 
 /** Společný startovní krok všech scénářů. */
@@ -56,7 +56,7 @@ private static final ScenarioStep START_STEP =
         new String[] { "Varňa", "Dommosklo" },// Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár", "Pult", "Stolička" },
         new String[] { },// H-objekty v batohu
-        Map.of(          //Nastavované příznaky
+        Map.of(
                 "pocestny.pozdraveny",  true,
                 "voda.nabrata",         false,
                 "ohen.zapaleny",        false,
