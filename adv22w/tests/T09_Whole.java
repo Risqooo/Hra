@@ -35,7 +35,7 @@ public class T09_Whole
      */
     public T09_Whole()
     {
-        super(Level.MISTAKES, DESCRIPTION, Visitor::new);
+        super(Level.WHOLE, DESCRIPTION, Visitor::new);
     }
 
 
