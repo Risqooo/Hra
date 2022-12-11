@@ -53,7 +53,7 @@ public class Portal
     @Override
     public String authorID()
     {
-        return "A1G";
+        return "BASR01";
     }
 
 
@@ -68,7 +68,7 @@ public class Portal
     @Override
     public String authorName()
     {
-        return "MISTAKE Scenario";
+        return "BAŠKO Richard";
     }
 
 
@@ -81,7 +81,7 @@ public class Portal
     @Override
     public String authorNativeName()
     {
-        return "CHYBOVÝ Scénář";
+        return "BAŠKO Richard";
     }
 
 
@@ -96,7 +96,7 @@ public class Portal
     @Override
     public String authorGroup()
     {
-        return "0_0007";
+        return "3_1245";
     }
 
 
