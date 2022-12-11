@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_World} reprezentuje svět červené Karkulky.
+ * Instance třídy {@code World} reprezentuje svět červené Karkulky.
  * V dané hře je definována jako jedináček.
  * Má na starosti uspořádání jednotlivých prostorů a udržuje informaci o tom,
  * ve kterém z nich se hráč právě nachází.
@@ -25,13 +25,13 @@ import java.util.Optional;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public   class CK_World
+public   class World
     implements IWorld
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
 
     /** Odkaz na jedinou instanci (jedináčka) této hry. */
-    private static final CK_World SINGLETON = new CK_World();
+    private static final World SINGLETON = new World();
 
 
 
@@ -48,7 +48,7 @@ public   class CK_World
      *
      * @return Instance dané hry
      */
-    static CK_World getInstance()
+    static World getInstance()
     {
         return SINGLETON;
     }
@@ -66,20 +66,20 @@ public   class CK_World
 //\IC== INSTANCE CONSTANTS (CONSTANT INSTANCE ATTRIBUTES/FIELDS) ===============
 
     /** Kolekce všech prostorů světa hry. */
-    private final Collection<CK_Place> places;
+    private final Collection<Place> places;
 
     /** Kolekce všech prostorů světa hry poskytovaná tazatelům. */
-    private final Collection<CK_Place> allPlaces;
+    private final Collection<Place> allPlaces;
 
     /** Výchozí aktuální prostor na počátku hry. */
-    private final CK_Place startPlace;
+    private final Place startPlace;
 
 
 
 //\IV== INSTANCE VARIABLES (VARIABLE INSTANCE ATTRIBUTES/FIELDS) ===============
 
     /** Aktuální prostor, v němž se nachází hráč. */
-    private CK_Place currentPlace;
+    private Place currentPlace;
 
 
 
@@ -90,17 +90,17 @@ public   class CK_World
      * Soukromý konstruktor definující jedinou instanci.
      * Protože je soukromý, musí být definován, i když má prázdné tělo.
      */
-    private CK_World()
+    private World()
     {
         places = new ArrayList<>();
         //Opis priestoru Zeľuvarenije
         places.add(startPlace =
-                   new CK_Place("Zeľuvarenije",
+                   new Place("Zeľuvarenije",
                        "Obchod kde Černokňažník obsluhuje pocestných",
                        new String[] { "Varňa", "Dommosklo" },
                        "Pocestný", "Pokladňa", "Pohár", "Pult", "Stolička"));
         //Opis priestoru Dommosklo
-        places.add(new CK_Place("Dommosklo",
+        places.add(new Place("Dommosklo",
                         """
                                 Skleník v ktorom rastú: 
                                 Zamiokulkas, Lopatkovec, Smíchovenec,
@@ -110,7 +110,7 @@ public   class CK_World
                         "Zamiokulkas", "Lopatkovec",
                         "Smíchovenec", "Afrikule", "Šachamašmak"));
         //Opis priestoru Varňa
-        places.add(new CK_Place("Varňa",
+        places.add(new Place("Varňa",
                         """
                         Varňa v ktorej Černokňažník varí lektvary.
                         Nachádza sa tu Kotlík, Špajza a Studňa.
@@ -119,7 +119,7 @@ public   class CK_World
                                     "Kotlík", "Špajza", "Studňa"},
                        "Kotlík", "Špajza", "Studňa"));
         //Opis priestoru Špajza
-        places.add(new CK_Place("Špajza",
+        places.add(new Place("Špajza",
                         """
                         Špajza v ktorej sa nachádzajú vysušené ingrediencie:
                         Dračígrc, Okomlok, Šalvia, Stromohnát a Rumbagule.
@@ -128,12 +128,12 @@ public   class CK_World
                         "Dračígrc", "Okomlok", "Šalvia",
                         "Stromohnát", "Rumbagule"));
         //Opis priestoru Studňa
-        places.add(new CK_Place("Studňa",
+        places.add(new Place("Studňa",
                        "Môžeš tu nabrať čistú vodu",
                        new String[] { "Varňa" }
                        /* nic */ ));
         //Opis priestoru Kotlík
-        places.add(new CK_Place("Kotlík",
+        places.add(new Place("Kotlík",
                 "Tu daj všetky ingrediencie a zamiešaj ich.",
                 new String[] { "Varňa" }
                 /* nic */ ));
@@ -164,7 +164,7 @@ public   class CK_World
      * @return Prostor, v němž se hráč pravé nachází
      */
     @Override
-    public CK_Place currentPlace()
+    public Place currentPlace()
     {
         return currentPlace;
     }
@@ -197,7 +197,7 @@ public   class CK_World
     @Override
     public void setCurrentPlace(IPlace destinationRoom)
     {
-        currentPlace = (CK_Place)destinationRoom;
+        currentPlace = (Place)destinationRoom;
     }
 
 
@@ -211,7 +211,7 @@ public   class CK_World
     @Override
     public void initialize()
     {
-        places.stream().forEach(CK_Place::initialize);
+        places.stream().forEach(Place::initialize);
         currentPlace = startPlace;
     }
 

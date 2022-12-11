@@ -9,7 +9,7 @@ import java.util.Collection;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_Bag} představuje úložiště,
+ * Instance třídy {@code Bag} představuje úložiště,
  * do nějž hráči ukládají objekty sebrané v jednotlivých prostorech,
  * aby je mohli přenést do jiných prostorů a/nebo použít.
  * Úložiště má konečnou kapacitu definující maximální povolený
@@ -21,8 +21,8 @@ import java.util.Collection;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public   class CK_Bag
-       extends CK_AItemContainer
+public   class Bag
+       extends AItemContainer
     implements IBag
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
@@ -31,7 +31,7 @@ public   class CK_Bag
     static final int CAPACITY = 6;
 
     /** Jediná instance batohu ve hře. */
-    private static final CK_Bag SINGLETON = new CK_Bag();
+    private static final Bag SINGLETON = new Bag();
 
 
 
@@ -48,7 +48,7 @@ public   class CK_Bag
      *
      * @return Instance dané hry
      */
-    static CK_Bag getInstance()
+    static Bag getInstance()
     {
         return SINGLETON;
     }
@@ -65,7 +65,7 @@ public   class CK_Bag
 //\IC== INSTANCE CONSTANTS (CONSTANT INSTANCE ATTRIBUTES/FIELDS) ===============
 
     /** Kolekce všech prostorů světa hry. */
-    private final Collection<CK_Item> items;
+    private final Collection<Item> items;
 
 
 
@@ -82,7 +82,7 @@ public   class CK_Bag
     /***************************************************************************
      */
     @SuppressWarnings("unchecked")
-    CK_Bag()
+    Bag()
     {
         super("Kapsa");
         items = new ArrayList<>();
@@ -147,7 +147,7 @@ public   class CK_Bag
      * @return The message on the result: {@code true} = was added,
      *         {@code false} = was not added
      */
-    public boolean addItem(CK_Item item)
+    public boolean addItem(Item item)
     {
         if (item.weight() > remains) {
             return false;

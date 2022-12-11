@@ -89,7 +89,7 @@ public class T09_Whole
      */
     public static void main(String[] args)
     {
-        IPortal   portal = null; //new CK_Factory();
+        IPortal   portal = null; //new Factory();
         T09_Whole tester = new T09_Whole();
         tester.test(portal);
         System.exit(0);

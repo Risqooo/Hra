@@ -5,7 +5,7 @@ package adv22w.api;
 import java.util.List;
 
 /*******************************************************************************
- * Instance třídy {@code CK_Scenarios} představují scénáře,
+ * Instance třídy {@code Scenarios} představují scénáře,
  * podle kterých je možno hrát hru, pro kterou jsou určeny.
  * Aby bylo možno jednotlivé scénáře od sebe odlišit,
  * je každý pojmenován a má přiřazen typ, podle které lze blíže určit,

@@ -5,7 +5,7 @@ import adv22w.api.IAction;
 import adv22w.api.IItem;
 import adv22w.api.INamed;
 
-import static adv22w._3_1245.basr01_mistakes.CK_Scenarios.*;
+import static adv22w._3_1245.basr01_mistakes.Scenarios.*;
 
 import java.util.*;
 import java.util.function.Function;
@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 
 /*******************************************************************************
- * Třída {@code CK_Action} má na starosti interpretaci příkazů
+ * Třída {@code Action} má na starosti interpretaci příkazů
  * zadávaných uživatelem hrajícím hru.
  * Název spouštěné akce je první slovo příkazu zadávaného z klávesnice
  * a další slova pak bývají interpretována jako argumenty.
@@ -28,14 +28,14 @@ import java.util.function.Function;
  * @author Rudolf PECINOVSKÝ
  * @version 2022-Winter
  */
-public class    CK_Action
-    extends CK_ANamed
+public class    Action
+    extends ANamed
     implements  IAction
 {
 //\CC== CONSTANT CLASS (STATIC) ATTRIBUTES (FIELDS) ============================
 
     /** Mapa definovaných akcí. */
-    private static final Map<String, CK_Action> NAME_2_ACTION;
+    private static final Map<String, Action> NAME_2_ACTION;
 
     /** Mapa testovaných a nastavovaných příznaků. */
     private static final Map<String, Object> conditions = new HashMap<>();
@@ -59,7 +59,7 @@ public class    CK_Action
      *
      * @return Kolekce všech příkazů použitelných ve hře
      */
-    static Collection<CK_Action> allActions()
+    static Collection<Action> allActions()
     {
         return Collections.unmodifiableCollection(NAME_2_ACTION.values());
     }
@@ -104,8 +104,8 @@ public class    CK_Action
      */
     private static void initialize()
     {
-        CK_World.getInstance().initialize();
-        CK_Bag  .getInstance().initialize();
+        World.getInstance().initialize();
+        Bag  .getInstance().initialize();
         conditions.put("living", List.of("Pocestný"));
         conditions.put("pocestny.pozdraveny", true);
         conditions.put("notlive", List.of("voda","ohen", "lektvar"));
@@ -141,7 +141,7 @@ public class    CK_Action
                                 .toLowerCase()
                                 .split("\\s+");
             String actionName = words[0];
-            CK_Action action  = NAME_2_ACTION.get(actionName);
+            Action action  = NAME_2_ACTION.get(actionName);
             String        answer;
             if (action == null) {
                 answer = UNKNOWN + actionName;
@@ -174,7 +174,7 @@ public class    CK_Action
     /***************************************************************************
      * Konstruktor vytvářející instance daného příkazu.
      */
-    CK_Action(String name, String description,
+    Action(String name, String description,
               Function<String[], String> action)
     {
         super(name);
@@ -232,7 +232,7 @@ public class    CK_Action
      * @param currentPlace Aktuální prostor
      * @return Optional obsahující odkaz na daný h-objekt nebo nic
      */
-    private static Optional<IItem> getiItem(CK_Place currentPlace) {
+    private static Optional<IItem> getiItem(Place currentPlace) {
         List<String>    livings = (List)(conditions.get("living"));
         Optional<IItem>   oItem = Optional.empty();
         for (String s : livings) {
@@ -247,25 +247,25 @@ public class    CK_Action
 
 static {
 NAME_2_ACTION = Map.of(
-    "choď", new CK_Action("Choď",
+    "choď", new Action("Choď",
         "Černokňažník sa presunie do zadaného susedného priestoru.",
         arguments -> {
             if (arguments.length < 2) {
                 return MOVE_WA;
             }
             String destinationName = arguments[1];
-            CK_World         world = CK_World.getInstance();
-            CK_Place currentPlace = world.currentPlace();
-            Optional<CK_Place> oDestination = INamed.getO(destinationName,
+            World         world = World.getInstance();
+            Place currentPlace = world.currentPlace();
+            Optional<Place> oDestination = INamed.getO(destinationName,
                                                      currentPlace.neighbors());
             if (! oDestination.isPresent()) {
                 return BAD_NEIGHBOR + destinationName;
             }
-            CK_Place destinationRoom = oDestination.get();
+            Place destinationRoom = oDestination.get();
             world.setCurrentPlace(destinationRoom);
             return GOTO + destinationRoom.description();
         }),
-    "vezmi", new CK_Action("Vezmi",
+    "vezmi", new Action("Vezmi",
         """
                   Vezme daný predmet a vloží ho do kapsy.
                   Predmet musí byť v aktuálnom priestore, prenesiteľný,
@@ -276,15 +276,15 @@ NAME_2_ACTION = Map.of(
                 return TAKE_WA;
             }
             String         itemName = arguments[1];
-            CK_World          world = CK_World.getInstance();
-            CK_Place currentPlace = world.currentPlace();
-            CK_Bag              bag = CK_Bag.getInstance();
+            World          world = World.getInstance();
+            Place currentPlace = world.currentPlace();
+            Bag              bag = Bag.getInstance();
             Optional<IItem> oItem = currentPlace.oItem(itemName);
             if (oItem.isEmpty()) {
                 return BAD_ITEM + itemName;
             }
-            CK_Item item = (CK_Item)oItem.get();
-            if (item.weight() == CK_Item.HEAVY) {
+            Item item = (Item)oItem.get();
+            if (item.weight() == Item.HEAVY) {
                 return UNMOVABLE + itemName;
             }
             boolean added = bag.addItem(item);
@@ -296,49 +296,49 @@ NAME_2_ACTION = Map.of(
                 return BAG_FULL + itemName;
             }
         }),
-    "polož", new CK_Action("Polož",
+    "polož", new Action("Polož",
         "Zadaný predmet z kapsy položí v aktuálnom priestore.",
         arguments -> {
             if (arguments.length < 2) {
                 return PUT_DOWN_WA;
             }
             String         itemName = arguments[1];
-            CK_Bag            bag = CK_Bag.getInstance();
+            Bag            bag = Bag.getInstance();
             Optional<IItem> oItem = bag.oItem(itemName);
             if (! oItem.isPresent()) {
                 return NOT_IN_BAG + itemName;
             }
-            CK_Item item = (CK_Item)oItem.get();
+            Item item = (Item)oItem.get();
             bag.removeItem(item);
-            CK_Place currentPlace = CK_World.getInstance().currentPlace();
+            Place currentPlace = World.getInstance().currentPlace();
             currentPlace.addItem(item);
             return PUT_DOWN + item.name();
         }),
-    "?", new CK_Action("?",
+    "?", new Action("?",
         "Zobrazí zoznam dostupných akcií spolu s ich stručnými popismi.",
         arguments -> {
-            Collection<CK_Action> actions = allActions();
+            Collection<Action> actions = allActions();
 //        Collector col = Collectors.joining(
-//                        "", "\n" + CK_Scenarios.SUBJECT, "");
+//                        "", "\n" + Scenarios.SUBJECT, "");
 //        String result = actions.stream()
 //            .map(action -> '\n' + action.name()
 //                         + '\n' + action.description())
 //            .sorted()
 //            .collect(col);
             StringBuilder sb = new StringBuilder(HELP);
-            for (CK_Action action : actions) {
+            for (Action action : actions) {
                 sb.append("\n\n").append(action.name())
                   .append('\n')  .append(action.description());
             }
             return sb.toString();
         }),
-    "koniec", new CK_Action("Koniec",
+    "koniec", new Action("Koniec",
         "Predčasné ukončenie hry.",
         arguments -> {
-            CK_Game.getInstance().stop();
+            Game.getInstance().stop();
             return END;
         }),
-    "pozdrav", new CK_Action("Pozdrav",
+    "pozdrav", new Action("Pozdrav",
         """
             Černokňažník pozdraví danú osobu v danom priestore.
             Osoba musí byť v danom priestore a nemôže byť pozdravený.
@@ -348,14 +348,14 @@ NAME_2_ACTION = Map.of(
                 return NS1_0Args;
             }
             String      enteredName = arguments[1].toLowerCase();
-            CK_World          world = CK_World.getInstance();
-            CK_Place currentPlace = world.currentPlace();
+            World          world = World.getInstance();
+            Place currentPlace = world.currentPlace();
             Optional<IItem>   oItem = INamed.getO(enteredName,
                                                   currentPlace.items());
             if (oItem.isEmpty()) {
                 return BAD_ITEM + enteredName;
             }
-            CK_Item item = (CK_Item)oItem.get();
+            Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
             if (! ((List)(conditions.get("living"))).contains(name)) {
                 return NS1_WRONG_ARG + item;
@@ -367,17 +367,17 @@ NAME_2_ACTION = Map.of(
             }
             return NS1_WrongCond + name;
         }),
-    "pozdrav", new CK_Action("Pozdrav",
+    "pozdrav", new Action("Pozdrav",
         "Karkulka pozdraví. Příkaz je bezparametrický,\n"
       + "ale v aktuálním prostoru musí být probuzený objekt.",
         arguments -> {
-            CK_World        world = CK_World.getInstance();
-            CK_Place currentPlace = world.currentPlace();
+            World        world = World.getInstance();
+            Place currentPlace = world.currentPlace();
             Optional<IItem> oItem = getiItem(currentPlace);
             if (oItem.isEmpty()) {
                 return "V prostoru není nikdo, koho by mělo smysl zdravit";
             }
-            CK_Item item = (CK_Item)oItem.get();
+            Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
             String  cond = name+".sleeping";
             if ((Boolean)(conditions.get(cond))) {
@@ -391,17 +391,17 @@ NAME_2_ACTION = Map.of(
             return NS_0;
 
         }),
-    "popřej", new CK_Action("Popřej",
+    "popřej", new Action("Popřej",
         "Karkulka popřeje k narozeninám. Příkaz je bezparametrický,\n"
       + "ale v aktuálním prostoru musí být pozdravený h-objekt.",
         arguments -> {
-            CK_World        world = CK_World.getInstance();
-            CK_Place currentPlace = world.currentPlace();
+            World        world = World.getInstance();
+            Place currentPlace = world.currentPlace();
             Optional<IItem> oItem = getiItem(currentPlace);
             if (oItem.isEmpty()) {
                 return "V prostoru není nikdo, komu by mělo smysl přát";
             }
-            CK_Item item = (CK_Item)oItem.get();
+            Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
             String  cond = name+".greeted";
             if ((Boolean)(conditions.get(cond))) {

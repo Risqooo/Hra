@@ -5,14 +5,14 @@ import adv22w.api.INamed;
 
 
 /*******************************************************************************
- * Instance abstraktní třídy {@code CK_ANamed} představují rodičovské podobjekty
+ * Instance abstraktní třídy {@code ANamed} představují rodičovské podobjekty
  * instancí tříd pojmenovaných objektů,
  * tj. tříd implementujících interfejs {@link INamed}.
  *
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public abstract class CK_ANamed
+public abstract class ANamed
            implements INamed
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
@@ -52,7 +52,7 @@ public abstract class CK_ANamed
      *
      * @param name Název dané instance
      */
-    public CK_ANamed(String name)
+    public ANamed(String name)
     {
         if ((name == null)  ||  name.isEmpty()) {
             throw new IllegalArgumentException(

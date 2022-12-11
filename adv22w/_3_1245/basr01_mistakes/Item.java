@@ -5,7 +5,7 @@ import adv22w.api.IItem;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_Item} přestavují objekty v prostorech.
+ * Instance třídy {@code Item} přestavují objekty v prostorech.
  * Objekty mohou být jak věci, tak i osoby či jiné skutečnosti (vůně,
  * světlo, fluidum, ...).
  * <p>
@@ -22,14 +22,14 @@ import adv22w.api.IItem;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public   class CK_Item
-       extends CK_ANamed
+public   class Item
+       extends ANamed
     implements IItem
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
 
     /** Kapacita batohu. */
-    static final int HEAVY = CK_Bag.CAPACITY +1;
+    static final int HEAVY = Bag.CAPACITY +1;
 
 
 
@@ -68,7 +68,7 @@ public   class CK_Item
      *
      * @param name Název vytvářeného objektu
      */
-    CK_Item(String name)
+    Item(String name)
     {
         super(name.substring(1));
         weight = (name.charAt(0) == '#')   ?  HEAVY

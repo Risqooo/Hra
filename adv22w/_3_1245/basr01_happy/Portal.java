@@ -1,31 +1,27 @@
-package adv22w._3_1245.basr01_mistakes;
+package adv22w._3_1245.basr01_happy;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 
-import adv22w.api.IGame;
 import adv22w.api.IPortal;
+import adv22w.api.IGame;
 import adv22w.api.Scenario;
-import adv22w.tests.T07_Mistakes;
+
+import adv22w.testers.FactoryTester;
+import adv22w.testers.Level;
 
 import java.util.List;
 
 
+
 /*******************************************************************************
- * Instance třídy {@code CK_Portal} představují tovární objekty,
+ * Instance třídy {@code Portal} představují tovární objekty,
  * které jsou schopny na požádání dodat informace o autorovi
  * a odkazy na instance klíčových objektů aplikace,
- * konkrétně aktuální hry, jejích scénářů.<br>
- * <br>
- * Dokud ještě některé z požadovaných metod nejsou definovány, dědí se
- * jejich implicitní verze z interfejsu
- * {@link IPortal}.<br>
- * <br>
- * <b>Tovární třídy musí povinně poskytovat veřejný bezparametrický
- * (tj. implicitní) konstruktor svých instancí</b>.
+ * konkrétně aktuální hry, jejích scénářů.
  *
  * @author  Rudolf PECINOVSKÝ
  * @version 2022-Winter
  */
-public class CK_Portal
+public   class Portal
     implements IPortal
 {
 //##############################################################################
@@ -33,7 +29,7 @@ public class CK_Portal
 
     /***************************************************************************
      */
-    public CK_Portal()
+    public Portal()
     {
     }
 
@@ -102,6 +98,7 @@ public class CK_Portal
 
 
 //##############################################################################
+//\IA== INSTANCE METHODS =======================================================
 /////// Metody vracející odkazy na klíčové objekty
 
     /***************************************************************************
@@ -137,7 +134,7 @@ public class CK_Portal
     @Override
     public List<Scenario> scenarios()
     {
-        return CK_Scenarios.scenarios();
+        return Scenarios.scenarios();
     }
 
 
@@ -153,7 +150,8 @@ public class CK_Portal
     @Override
     public IGame game()
     {
-        return CK_Game.getInstance();
+        throw new UnsupportedOperationException("Není korektně definována "
+                + "tovární metoda vracející instanci hry");
     }
 
 
@@ -162,15 +160,14 @@ public class CK_Portal
 //== MAIN METHOD ===============================================================
 
     /***************************************************************************
-     * Metoda testuje odevzdané řešení.
+     * Metoda testuje danou hladinu rozpracovanosti aplikace,
+     * zde definici šťastného scénáře.
      *
      * @param args Parametry příkazového řádku
      */
     public static void main(String[] args)
     {
-        var portal = new CK_Portal();
-        var tester = new T07_Mistakes();
-        tester.test(portal);
-//        new FactoryTester(portal).testForLevel(Level.MISTAKES);
+        var m = new Portal();
+        new FactoryTester(m).testForLevel(Level.HAPPY);
     }
 }

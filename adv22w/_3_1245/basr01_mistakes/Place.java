@@ -7,7 +7,7 @@ import java.util.*;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_Place} představují prostory ve hře.
+ * Instance třídy {@code Place} představují prostory ve hře.
  * Dosažení prostoru si můžeme představovat jako částečný cíl,
  * kterého se hráč ve hře snaží dosáhnout.
  * Prostory mohou být místnosti, planety, životní etapy atd.
@@ -23,8 +23,8 @@ import java.util.*;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public   class CK_Place
-       extends CK_AItemContainer
+public   class Place
+       extends AItemContainer
     implements IPlace
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
@@ -51,10 +51,10 @@ public   class CK_Place
     private final String[] initialNeighborNames;
 
     /** Kolekce aktuálních sousedů. */
-    private final Map<String, CK_Place> name2neighbor;
+    private final Map<String, Place> name2neighbor;
 
     /** Exportovaná kolekce aktuálních sousedů. */
-    private final Collection<CK_Place> exportedNeighbors;
+    private final Collection<Place> exportedNeighbors;
 
 
 
@@ -68,7 +68,7 @@ public   class CK_Place
     /***************************************************************************
      *
      */
-    CK_Place(String name, String description,
+    Place(String name, String description,
              String[] neighborNames, String... itemNames)
     {
         super(name, itemNames);
@@ -104,7 +104,7 @@ public   class CK_Place
      * @return Kolekce sousedů
      */
     @Override
-    public Collection<CK_Place> neighbors()
+    public Collection<Place> neighbors()
     {
         return exportedNeighbors;
     }
@@ -133,12 +133,12 @@ public   class CK_Place
      */
     private void initializeNeighbors()
     {
-        CK_World world = CK_World.getInstance();
+        World world = World.getInstance();
         name2neighbor.clear();
         Arrays.stream(initialNeighborNames)
             .forEach(name ->
                 name2neighbor.put(name.toLowerCase(),
-                                  (CK_Place)(world.oPlace(name).get())));
+                                  (Place)(world.oPlace(name).get())));
     }
 
 

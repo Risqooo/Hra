@@ -96,7 +96,7 @@ public class TestGame
      * @param args Parametry příkazového řádku
      */
     public static void main(String[] args) {
-//        IPortal    portal = new CK_Portal();
+//        IPortal    portal = new Portal();
 //        T07_Mistakes tester  = new T07_Mistakes();
 //        tester.test(portal);
 //        System.exit(0);

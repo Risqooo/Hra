@@ -13,7 +13,7 @@ import java.util.List;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_Portal} představují tovární objekty,
+ * Instance třídy {@code Portal} představují tovární objekty,
  * které jsou schopny na požádání dodat informace o autorovi
  * a odkazy na instance klíčových objektů aplikace,
  * konkrétně aktuální hry, jejích scénářů.
@@ -21,7 +21,7 @@ import java.util.List;
  * @author  Rudolf PECINOVSKÝ
  * @version 2022-Winter
  */
-public   class CK_Portal
+public   class Portal
     implements IPortal
 {
 //##############################################################################
@@ -29,7 +29,7 @@ public   class CK_Portal
 
     /***************************************************************************
      */
-    public CK_Portal()
+    public Portal()
     {
     }
 
@@ -134,7 +134,7 @@ public   class CK_Portal
     @Override
     public List<Scenario> scenarios()
     {
-        return CK_Scenarios.scenarios();
+        return Scenarios.scenarios();
     }
 
 
@@ -167,7 +167,7 @@ public   class CK_Portal
      */
     public static void main(String[] args)
     {
-        var m = new CK_Portal();
+        var m = new Portal();
         new FactoryTester(m).testForLevel(Level.SCENARIOS);
     }
 }

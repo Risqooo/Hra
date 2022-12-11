@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 /*******************************************************************************
- * Instance třídy {@code CK_Game} má na starosti řízení hry
+ * Instance třídy {@code Game} má na starosti řízení hry
  * a komunikaci s uživatelským rozhraním.
  * Je schopna akceptovat zadávané příkazy a poskytovat informace
  * o průběžném stavu hry a jejích součástí.
@@ -23,13 +23,13 @@ import java.util.Map;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-public   class CK_Game
+public   class Game
     implements IGame
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
 
     /** Odkaz na jedinou instanci (jedináčka) této hry. */
-    private static final CK_Game SINGLETON = new CK_Game();
+    private static final Game SINGLETON = new Game();
 
     /** Přepravka s názvy povinných akcí. */
     private static final BasicActions BASIC_ACTIONS =
@@ -51,7 +51,7 @@ public   class CK_Game
      *
      * @return Instance dané hry
      */
-    public static CK_Game getInstance()
+    public static Game getInstance()
     {
         return SINGLETON;
     }
@@ -79,7 +79,7 @@ public   class CK_Game
      * Soukromý konstruktor definující jedinou instanci.
      * Protože je soukromý, musí být definován, i když má prázdné tělo.
      */
-    private CK_Game()
+    private Game()
     {
     }
 
@@ -99,7 +99,7 @@ public   class CK_Game
     @Override
     public boolean isAlive()
     {
-        return CK_Action.isAlive;
+        return Action.isAlive;
     }
 
 
@@ -111,7 +111,7 @@ public   class CK_Game
     @Override
     public IBag bag()
     {
-        return CK_Bag.getInstance();
+        return Bag.getInstance();
     }
 
 
@@ -124,7 +124,7 @@ public   class CK_Game
     //@Override
     public Map<String, Object> conditions()
     {
-        return CK_Action.conditions();
+        return Action.conditions();
     }
 
 
@@ -136,7 +136,7 @@ public   class CK_Game
     @Override
     public Collection<? extends IAction> allActions()
     {
-        return CK_Action.allActions();
+        return Action.allActions();
     }
 
 
@@ -167,7 +167,7 @@ public   class CK_Game
     @Override
     public IWorld world()
     {
-        return CK_World.getInstance();
+        return World.getInstance();
     }
 
 
@@ -183,7 +183,7 @@ public   class CK_Game
     @Override
     public String executeCommand(String command)
     {
-        String result = CK_Action.executeCommand(command);
+        String result = Action.executeCommand(command);
         return result;
     }
 
@@ -194,7 +194,7 @@ public   class CK_Game
     @Override
     public void stop()
     {
-        CK_Action.isAlive = false;
+        Action.isAlive = false;
     }
 
 

@@ -14,7 +14,7 @@ import static adv22w.api.TypeOfStep.*;
 
 
 /*******************************************************************************
- * Třída {@code CK_Scenarios} představuje sbírku scénářů,
+ * Třída {@code Scenarios} představuje sbírku scénářů,
  * podle kterých je možno hrát (anebo testovat) hru, pro niž jsou určeny.
  * Aby bylo možno jednotlivé scénáře od sebe odlišit,
  * je každý pojmenován a má přiřazen typ, podle které lze blíže určit,
@@ -23,7 +23,7 @@ import static adv22w.api.TypeOfStep.*;
  * @author  Rudolf PECINOVSKÝ
  * @version 2022-Winter
  */
-public class CK_Scenarios
+public class Scenarios
 {
 //\CV== CLASS (STATIC) ATTRIBUTES (FIELDS) =====================================
 

@@ -19,8 +19,8 @@ import java.util.Optional;
  * @author  Rudolf PECINOVSKÝ
  * @version 2021-Summer
  */
-abstract class CK_AItemContainer
-       extends CK_ANamed
+abstract class AItemContainer
+       extends ANamed
     implements IItemContainer
 {
 //\CC== CLASS CONSTANTS (CONSTANT CLASS/STATIC ATTRIBUTES/FIELDS) ==============
@@ -66,12 +66,12 @@ abstract class CK_AItemContainer
      * @param name      Name of the child object
      * @param itemNames Names of items in the container at the game beginning
      */
-    CK_AItemContainer(String name, String... itemNames)
+    AItemContainer(String name, String... itemNames)
     {
         super(name);
         initialItems   = new ArrayList<>();
         for (String itemName : itemNames) {
-            initialItems.add(new CK_Item(itemName));
+            initialItems.add(new Item(itemName));
         }
         this.items         = new ArrayList<>(initialItems);
         this.exportedItems = Collections.unmodifiableCollection(items);
