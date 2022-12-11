@@ -341,7 +341,7 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
                 new String[] { }    // H-objekty v batohu
         )
 );
-/////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 private static final Scenario MISTAKES = new Scenario(scMISTAKES,
     new ScenarioStep(-1, tsNOT_START, "Štart",
         """
@@ -371,7 +371,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsMOVE_WA, "Choď",
-        "Neviem, kam mám ísť :( . Musíš zadať meno cieľového priestoru.",
+        "Neviem, kam mám ísť :( . " +
+        "Musíš zadať meno cieľového priestoru.",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -473,7 +474,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
     )
 );
 ////////////////////////////////////////////////////////////////////////////////
-private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS, START_STEP,
+private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
+    START_STEP,
     HAPPY.steps().get(1),
     new ScenarioStep(tsNS0_WrongCond, "Pozdrav",
         "Už si pozdravil, načo to robiť zas.",
@@ -540,93 +542,93 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS, START_S
     HAPPY.steps().get(14),
     HAPPY.steps().get(15),
     HAPPY.steps().get(16),
-        new ScenarioStep(tsNS3_WRONG_1stARG, "Zapáľ seba pod kotlom",
-                "Musíš zapáliť oheň pod kotlom",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda" }, // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("ohen.zapaleny", false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        new ScenarioStep(tsNS3_WRONG_2ndARG, "Zapáľ oheň nad kotlom",
-                "Musíš zapáliť oheň pod kotlom",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda" },   // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("ohen.zapaleny", false), //Očekávané příznaky
-                null   // Nastavované příznaky
-        ),
-        new ScenarioStep(tsNS3_WRONG_3rdARG, "Zapáľ oheň pod sebou",
-                "Musíš zapáliť oheň pod kotlom",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda" }, // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("ohen.zapaleny", false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        HAPPY.steps().get(17),
-        new ScenarioStep(tsNS1_0Args, "Zamiešaj",
-                "Neviem čo mám zamiešať. Musíš zadať meno objektu.",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda"},  // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        new ScenarioStep(tsNS1_WRONG_ARG, "Zamiešaj Kotlík",
-                "Musíš zamiešať Lektvar",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda"},  // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        HAPPY.steps().get(18),
-        new ScenarioStep(tsNS1_WrongCond, "Zamiešaj Lektvar",
-                "Načo miešať lektvar, keď už je namiešaný.",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Lektvar" }, // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        HAPPY.steps().get(19),
-        HAPPY.steps().get(20),
-        HAPPY.steps().get(21),
-        new ScenarioStep(tsNOT_SUCCESS, "Naservíruj",
-                "Černokňažník ešte neuvaril Lektvar",
-                "Zeľuvarenije", // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] { "Pocestný", "Pokladňa", "Pohár",
-                        "Pult", "Stolička" },   // H-objekty
-                new String[] {"Varecha", "Lektvar"},    // H-objekty v batohu
-                Map.of(
-                        "pocestny.pozdraveny",  true,
-                        "voda.nabrata",         false,
-                        "ohen.zapaleny",        false,
-                        "lektvar.zamiesany",    false,
-                        "lektvar.naservirovany",false), //Očekávané příznaky
-                null    // Nastavované příznaky
-        ),
-        new ScenarioStep(tsEND, "Koniec",
-                "Hru si ukončil príkazom Koniec",
-                "Zeľuvarenije", // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] { "Pocestný", "Pokladňa", "Pohár",
-                        "Pult", "Stolička" },   // H-objekty
-                new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
-        )
+    new ScenarioStep(tsNS3_WRONG_1stARG, "Zapáľ seba pod kotlom",
+            "Musíš zapáliť oheň pod kotlom",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda" }, // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("ohen.zapaleny", false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    new ScenarioStep(tsNS3_WRONG_2ndARG, "Zapáľ oheň nad kotlom",
+            "Musíš zapáliť oheň pod kotlom",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda" },   // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("ohen.zapaleny", false), //Očekávané příznaky
+            null   // Nastavované příznaky
+    ),
+    new ScenarioStep(tsNS3_WRONG_3rdARG, "Zapáľ oheň pod sebou",
+            "Musíš zapáliť oheň pod kotlom",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda" }, // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("ohen.zapaleny", false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    HAPPY.steps().get(17),
+    new ScenarioStep(tsNS1_0Args, "Zamiešaj",
+            "Neviem čo mám zamiešať. Musíš zadať meno objektu.",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda"},  // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("lektvar.zamiesany", false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    new ScenarioStep(tsNS1_WRONG_ARG, "Zamiešaj Kotlík",
+            "Musíš zamiešať Lektvar",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda"},  // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("lektvar.zamiesany", false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    HAPPY.steps().get(18),
+    new ScenarioStep(tsNS1_WrongCond, "Zamiešaj Lektvar",
+            "Načo miešať lektvar, keď už je namiešaný.",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Lektvar" }, // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("lektvar.zamiesany", false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    HAPPY.steps().get(19),
+    HAPPY.steps().get(20),
+    HAPPY.steps().get(21),
+    new ScenarioStep(tsNOT_SUCCESS, "Naservíruj",
+            "Černokňažník ešte neuvaril Lektvar",
+            "Zeľuvarenije", // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] { "Pocestný", "Pokladňa", "Pohár",
+                    "Pult", "Stolička" },   // H-objekty
+            new String[] {"Varecha", "Lektvar"},    // H-objekty v batohu
+            Map.of(
+                    "pocestny.pozdraveny",  true,
+                    "voda.nabrata",         false,
+                    "ohen.zapaleny",        false,
+                    "lektvar.zamiesany",    false,
+                    "lektvar.naservirovany",false), //Očekávané příznaky
+            null    // Nastavované příznaky
+    ),
+    new ScenarioStep(tsEND, "Koniec",
+            "Hru si ukončil príkazom Koniec",
+            "Zeľuvarenije", // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] { "Pocestný", "Pokladňa", "Pohár",
+                    "Pult", "Stolička" },   // H-objekty
+            new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
+    )
 );
 
 
