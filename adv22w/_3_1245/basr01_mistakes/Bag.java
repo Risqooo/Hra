@@ -84,7 +84,7 @@ public   class Bag
     @SuppressWarnings("unchecked")
     Bag()
     {
-        super("Košík");
+        super("Kapsa");
         items = new ArrayList<>();
     }
 

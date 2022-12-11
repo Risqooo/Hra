@@ -245,7 +245,7 @@ public class    Action
 
 static {
 NAME_2_ACTION = Map.of(
-    "jdi", new Action("Jdi",
+    "choď", new Action("Choď",
         "Přesune Karkulku do zadaného sousedního prostoru.",
         arguments -> {
             if (arguments.length < 2) {
@@ -328,8 +328,8 @@ NAME_2_ACTION = Map.of(
             }
             return sb.toString();
         }),
-    "konec", new Action("Konec",
-        "Předčasné ukončení hry.",
+    "koniec", new Action("Koniec",
+        "Predčasné ukončenie hry.",
         arguments -> {
             Game.getInstance().stop();
             return END;

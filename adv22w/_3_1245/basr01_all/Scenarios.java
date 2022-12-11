@@ -77,8 +77,8 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
         Map.of("pocestny.pozdraveny",  true),//Očekávané příznaky
         Map.of("pocestny.pozdraveny",  false) //Nastavené príznaky
     ),
-    new ScenarioStep(tsGOTO, "Choď Dommosklo",
-        "Černokňažník sa presunul do priestoru:  Dommosklo",
+    new ScenarioStep(2, tsGOTO, "Choď Dommosklo",
+        "Černokňažník sa presunul do priestoru: Dommosklo",
         "Dommosklo",    // Aktuální prostor
         new String[] { "Varňa", "Zeľuvarenije"},    // Sousedé
         new String[] { "Zamiokulkas", "Lopatkovec",
@@ -322,7 +322,7 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsEND, "Koniec",
-        "Hra si ukončil príkazom: Koniec",
+        "Hru si ukončil príkazom: Koniec",
         "Dommosklo",    // Aktuální prostor
         new String[] { "Varňa", "Zeľuvarenije" },   // Sousedé
         new String[] { "Zamiokulkas", "Lopatkovec", "Smíchovenec",

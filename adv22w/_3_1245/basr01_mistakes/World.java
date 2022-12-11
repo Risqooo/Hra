@@ -99,7 +99,7 @@ private World()
                    new String[] { "Varňa", "Dommosklo" },
                    "#Pocestný", "_Pokladňa", "_Pohár", "#Pult", "_Stolička"));
     places.add(new Place("Dommosklo",
-                   "Skleník s ingredienciami:" +
+                   "Dommosklo s ingredienciami:\n" +
                    "Zamiokulkas, Lopatkovec, Smíchovenec, Afrikule a Šachamašmak",
                    new String[] {  "Varňa", "Zeľuvarenije" },
                     "_Zamiokulkas", "_Lopatkovec",
@@ -108,7 +108,7 @@ private World()
                    "Varňa v ktorej je: " +
                            "Špajza, Kotlík a Studňa",
                    new String[] { "Dommosklo", "Zeľuvarenije",
-                           "Kotlík", "Špajza", "Studňa" },
+                           "Kotlík", "Špajza", "Studňa"},
                    "_Varecha"));
     places.add(new Place("Špajza",
                    "Špajza v ktorej sa nachádza: " +
