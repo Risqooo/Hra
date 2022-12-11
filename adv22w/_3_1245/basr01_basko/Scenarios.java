@@ -80,220 +80,220 @@ private static final ScenarioStep START_STEP =
 
 ////////////////////////////////////////////////////////////////////////////////
 private static final Scenario HAPPY = new Scenario(scHAPPY,
-        START_STEP,
-        new ScenarioStep(tsNS_0, "Pozdrav",
-                "Černokňažník pozdravil osobu: Pocestný",
-                "Zeľuvarenije",                   // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] { "Pocestný", "Pokladňa",
-                        "Pohár", "Pult", "Stolička" },          // H-obj.
-                new String[] { },                       // H-objekty v batohu
-                Map.of("pocestny.pozdraveny",  true),//Očekávané příznaky
-                Map.of("pocestny.pozdraveny",  false) //Nastavené príznaky
-        ),
-        new ScenarioStep(tsGOTO, "Choď Dommosklo",
-                "Černokňažník sa presunul do priestoru:Dommosklo",
-                "Dommosklo",    // Aktuální prostor
-                new String[] { "Varňa", "Zeľuvarenije"},    // Sousedé
-                new String[] { "Zamiokulkas", "Lopatkovec",
-                        "Smíchovenec", "Afrikule", "Šachamašmak"},// H-objekty
-                new String[] { }                         // H-objekty v batohu
-        ),
-        new ScenarioStep(tsTAKE, "Vezmi Smíchovenec",
-                "Černokňažník vzal do kapsy objekt: Smíchovenec",
-                "Dommosklo",    // Aktuální prostor
-                new String[] { "Varňa", "Zeľuvarenije"},    //Sousedé
-                new String[] { "Zamiokulkas", "Lopatkovec",
-                        "Afrikule", "Šachamašmak"},  	// H-objekty
-                new String[] { "Smíchovenec" }  // H-objekty v batohu
-        ),
-        new ScenarioStep(tsGOTO, "Choď Varňa",
-                "Černokňažník sa presunul do priestoru: Varňa",
-                "Varňa",    // Aktuální prostor
-                new String[] { "Dommosklo", "Zeľuvarenije",
-                        "Kotlík", "Špajza", "Studňa"},  // Sousedé
-                new String[] {"Varecha"},   // H-objekty
-                new String[] { "Smíchovenec" }  // H-objekty v batohu
-        ),
-        new ScenarioStep(tsGOTO, "Choď Špajza",
-                "Černokňažník sa presunul do priestoru: Špajza",
-                "Špajza",   // Aktuální prostor
-                new String[] {"Varňa"}, // Sousedé
-                new String[] { "Dračígrc", "Okomlok", "Šalvia",
-                        "Stromohnát", "Rumbagule" },  	// H-objekty
-                new String[] { "Smíchovenec" }  // H-objekty v batohu
-        ),
-        new ScenarioStep(tsTAKE, "Vezmi Dračígrc",
-                "Černokňažník vzal do kapsy objekt: Dračígrc",
-                "Špajza",   // Aktuální prostor
-                new String[] { "Varňa"},    // Sousedé
-                new String[] { "Okomlok", "Šalvia",
-                        "Stromohnát", "Rumbagule" },    // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc" }  // H-objekty v batohu
-        ),
-        new ScenarioStep(tsTAKE, "Vezmi Šalvia",
-                "Černokňažník vzal do kapsy objekt: Šalvia",
-                "Špajza",   // Aktuální prostor
-                new String[] { "Varňa"},    // Sousedé
-                new String[] { "Okomlok", "Stromohnát",
-                        "Rumbagule" },  // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia" }    // H-objekty v batohu
-        ),
-        new ScenarioStep(tsGOTO, "Choď Varňa",
-                "Černokňažník sa presunul do priestoru: Varňa",
-                "Varňa",    // Aktuální prostor
-                new String[] { "Dommosklo", "Zeľuvarenije",
-                        "Kotlík", "Špajza", "Studňa"},  // Sousedé
-                new String[] {"Varecha"},   // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia" }  // H-objekty v batohu
-        ),
-        new ScenarioStep(tsTAKE, "Vezmi Varecha",
-                "Černokňažník vzal do kapsy objekt: Varecha",
-                "Varňa",    // Aktuální prostor
-                new String[] { "Dommosklo", "Zeľuvarenije",
-                        "Kotlík", "Špajza", "Studňa"},  // Sousedé
-                new String[] {},    // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia","Varecha" }    // H-objekty v batohu
-        ),
-        new ScenarioStep(tsGOTO, "Choď Studňa",
-                "Černokňažník sa presunul k: Studňa",
-                "Studňa",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] {},    // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Varecha" }   // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsNS_2, "Naber čistú vodu",
-                "Černokňažník nabral zo studne vodu",
-                "Studňa",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] {},    // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Varecha", "Voda" },  // H-objekty v batohu
-                Map.of("voda.nabrata",  false),
-                Map.of("voda.nabrata", true)
-        )
-        ,
-        new ScenarioStep(tsGOTO, "Choď Kotlík",
-                "Černokňažník sa presunul ku: Kotlík",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] {},    // H-objekty
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Varecha", "Voda" } // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsPUT_DOWN, "Polož Smíchovenec",
-                "Černokňažník vybral z kapsy: Smíchovenec",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec" }, // H-objekty
-                new String[] {"Dračígrc", "Šalvia",
-                        "Varecha", "Voda" } // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsPUT_DOWN, "Polož Dračígrc",
-                "Černokňažník vybral z kapsy: Dračígrc",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc" }, // H-objekty
-                new String[] { "Šalvia","Varecha",
-                        "Voda" } // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsPUT_DOWN, "Polož Šalvia",
-                "Černokňažník vybral z kapsy: Šalvia",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia"},    // H-objekty
-                new String[] {"Varecha", "Voda"}    // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsPUT_DOWN, "Polož Voda",
-                "Černokňažník vybral z kapsy: Voda",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda"},  	// H-objekty
-                new String[] {"Varecha"}    // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsNS_3, "Zapáľ oheň pod kotlom",
-                "Černokňažník zapálil oheň pod kotlom",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Smíchovenec", "Dračígrc",
-                        "Šalvia", "Voda"},  // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("ohen.zapaleny", false),
-                Map.of("ohen.zapaleny", true)
-        )
-        ,
-        new ScenarioStep(tsNS_1, "Zamiešaj Lektvar",
-                "Černokňažník zamiešal obsah kotlíka a vyrobil: Lektvar",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] { "Lektvar"},  // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("lektvar.zamiesany", false),
-                Map.of("lektvar.zamiesany", true)
-        )
-        ,
-        new ScenarioStep(tsTAKE, "Vezmi Lektvar",
-                "Černokňažník vzal do kapsy objekt: Lektvar",
-                "Kotlík",   // Aktuální prostor
-                new String[] { "Varňa" },   // Sousedé
-                new String[] {},    // H-objekty
-                new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsGOTO, "Choď Varňa",
-                "Černokňažník sa presunul do priestoru: Varňa",
-                "Varňa",    // Aktuální prostor
-                new String[] { "Dommosklo", "Zeľuvarenije",
-                        "Kotlík", "Špajza", "Studňa"},  // Sousedé
-                new String[] {},    // H-objekty
-                new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsGOTO, "Choď Zeľuvarenije",
-                "Černokňažník sa presunul do priestoru: Zeľuvarenije",
-                "Zeľuvarenije", // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] {"Pocestný", "Pokladňa",
-                        "Pohár", "Pult", "Stolička"}, // H-objekty
-                new String[] {"Lektvar","Varecha"}  // H-objekty v batohu
-        )
-        ,
-        new ScenarioStep(tsPUT_DOWN, "Polož Lektvar",
-                "Černokňažník vybral z kapsy: Lektvar",
-                "Zeľuvarenije", // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] { "Pocestný", "Pokladňa", "Pohár",
-                        "Pult", "Stolička", "Lektvar" },    // H-objekty
-                new String[] {"Varecha"}    // H-objekty v batohu
-        )
-        ,
+    START_STEP,
+    new ScenarioStep(tsNS_0, "Pozdrav",
+            "Černokňažník pozdravil osobu: Pocestný",
+            "Zeľuvarenije",                   // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] { "Pocestný", "Pokladňa",
+                    "Pohár", "Pult", "Stolička" },          // H-obj.
+            new String[] { },                       // H-objekty v batohu
+            Map.of("pocestny.pozdraveny",  true),//Očekávané příznaky
+            Map.of("pocestny.pozdraveny",  false) //Nastavené príznaky
+    ),
+    new ScenarioStep(tsGOTO, "Choď Dommosklo",
+            "Černokňažník sa presunul do priestoru:Dommosklo",
+            "Dommosklo",    // Aktuální prostor
+            new String[] { "Varňa", "Zeľuvarenije"},    // Sousedé
+            new String[] { "Zamiokulkas", "Lopatkovec",
+                    "Smíchovenec", "Afrikule", "Šachamašmak"},// H-objekty
+            new String[] { }                         // H-objekty v batohu
+    ),
+    new ScenarioStep(tsTAKE, "Vezmi Smíchovenec",
+            "Černokňažník vzal do kapsy objekt: Smíchovenec",
+            "Dommosklo",    // Aktuální prostor
+            new String[] { "Varňa", "Zeľuvarenije"},    //Sousedé
+            new String[] { "Zamiokulkas", "Lopatkovec",
+                    "Afrikule", "Šachamašmak"},  	// H-objekty
+            new String[] { "Smíchovenec" }  // H-objekty v batohu
+    ),
+    new ScenarioStep(tsGOTO, "Choď Varňa",
+            "Černokňažník sa presunul do priestoru: Varňa",
+            "Varňa",    // Aktuální prostor
+            new String[] { "Dommosklo", "Zeľuvarenije",
+                    "Kotlík", "Špajza", "Studňa"},  // Sousedé
+            new String[] {"Varecha"},   // H-objekty
+            new String[] { "Smíchovenec" }  // H-objekty v batohu
+    ),
+    new ScenarioStep(tsGOTO, "Choď Špajza",
+            "Černokňažník sa presunul do priestoru: Špajza",
+            "Špajza",   // Aktuální prostor
+            new String[] {"Varňa"}, // Sousedé
+            new String[] { "Dračígrc", "Okomlok", "Šalvia",
+                    "Stromohnát", "Rumbagule" },  	// H-objekty
+            new String[] { "Smíchovenec" }  // H-objekty v batohu
+    ),
+    new ScenarioStep(tsTAKE, "Vezmi Dračígrc",
+            "Černokňažník vzal do kapsy objekt: Dračígrc",
+            "Špajza",   // Aktuální prostor
+            new String[] { "Varňa"},    // Sousedé
+            new String[] { "Okomlok", "Šalvia",
+                    "Stromohnát", "Rumbagule" },    // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc" }  // H-objekty v batohu
+    ),
+    new ScenarioStep(tsTAKE, "Vezmi Šalvia",
+            "Černokňažník vzal do kapsy objekt: Šalvia",
+            "Špajza",   // Aktuální prostor
+            new String[] { "Varňa"},    // Sousedé
+            new String[] { "Okomlok", "Stromohnát",
+                    "Rumbagule" },  // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia" }    // H-objekty v batohu
+    ),
+    new ScenarioStep(tsGOTO, "Choď Varňa",
+            "Černokňažník sa presunul do priestoru: Varňa",
+            "Varňa",    // Aktuální prostor
+            new String[] { "Dommosklo", "Zeľuvarenije",
+                    "Kotlík", "Špajza", "Studňa"},  // Sousedé
+            new String[] {"Varecha"},   // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia" }  // H-objekty v batohu
+    ),
+    new ScenarioStep(tsTAKE, "Vezmi Varecha",
+            "Černokňažník vzal do kapsy objekt: Varecha",
+            "Varňa",    // Aktuální prostor
+            new String[] { "Dommosklo", "Zeľuvarenije",
+                    "Kotlík", "Špajza", "Studňa"},  // Sousedé
+            new String[] {},    // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia","Varecha" }    // H-objekty v batohu
+    ),
+    new ScenarioStep(tsGOTO, "Choď Studňa",
+            "Černokňažník sa presunul k: Studňa",
+            "Studňa",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] {},    // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Varecha" }   // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsNS_2, "Naber čistú vodu",
+            "Černokňažník nabral zo studne vodu",
+            "Studňa",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] {},    // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Varecha", "Voda" },  // H-objekty v batohu
+            Map.of("voda.nabrata",  false),
+            Map.of("voda.nabrata", true)
+    )
+    ,
+    new ScenarioStep(tsGOTO, "Choď Kotlík",
+            "Černokňažník sa presunul ku: Kotlík",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] {},    // H-objekty
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Varecha", "Voda" } // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsPUT_DOWN, "Polož Smíchovenec",
+            "Černokňažník vybral z kapsy: Smíchovenec",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec" }, // H-objekty
+            new String[] {"Dračígrc", "Šalvia",
+                    "Varecha", "Voda" } // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsPUT_DOWN, "Polož Dračígrc",
+            "Černokňažník vybral z kapsy: Dračígrc",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc" }, // H-objekty
+            new String[] { "Šalvia","Varecha",
+                    "Voda" } // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsPUT_DOWN, "Polož Šalvia",
+            "Černokňažník vybral z kapsy: Šalvia",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia"},    // H-objekty
+            new String[] {"Varecha", "Voda"}    // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsPUT_DOWN, "Polož Voda",
+            "Černokňažník vybral z kapsy: Voda",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda"},  	// H-objekty
+            new String[] {"Varecha"}    // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsNS_3, "Zapáľ oheň pod kotlom",
+            "Černokňažník zapálil oheň pod kotlom",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Smíchovenec", "Dračígrc",
+                    "Šalvia", "Voda"},  // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("ohen.zapaleny", false),
+            Map.of("ohen.zapaleny", true)
+    )
+    ,
+    new ScenarioStep(tsNS_1, "Zamiešaj Lektvar",
+            "Černokňažník zamiešal obsah kotlíka a vyrobil: Lektvar",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] { "Lektvar"},  // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("lektvar.zamiesany", false),
+            Map.of("lektvar.zamiesany", true)
+    )
+    ,
+    new ScenarioStep(tsTAKE, "Vezmi Lektvar",
+            "Černokňažník vzal do kapsy objekt: Lektvar",
+            "Kotlík",   // Aktuální prostor
+            new String[] { "Varňa" },   // Sousedé
+            new String[] {},    // H-objekty
+            new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsGOTO, "Choď Varňa",
+            "Černokňažník sa presunul do priestoru: Varňa",
+            "Varňa",    // Aktuální prostor
+            new String[] { "Dommosklo", "Zeľuvarenije",
+                    "Kotlík", "Špajza", "Studňa"},  // Sousedé
+            new String[] {},    // H-objekty
+            new String[] {"Varecha", "Lektvar"} // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsGOTO, "Choď Zeľuvarenije",
+            "Černokňažník sa presunul do priestoru: Zeľuvarenije",
+            "Zeľuvarenije", // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] {"Pocestný", "Pokladňa",
+                    "Pohár", "Pult", "Stolička"}, // H-objekty
+            new String[] {"Lektvar","Varecha"}  // H-objekty v batohu
+    )
+    ,
+    new ScenarioStep(tsPUT_DOWN, "Polož Lektvar",
+            "Černokňažník vybral z kapsy: Lektvar",
+            "Zeľuvarenije", // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] { "Pocestný", "Pokladňa", "Pohár",
+                    "Pult", "Stolička", "Lektvar" },    // H-objekty
+            new String[] {"Varecha"}    // H-objekty v batohu
+    )
+    ,
 
-        new ScenarioStep(tsSUCCESS, "Naservíruj",
-                """
-                        Černokňažník naservíroval Pocestnému: Lektvar
-                        Úspešne ste ukončili hru.
-                        Ďakujeme že ste si ju zahrali.
-                        """,
-                "Zeľuvarenije", // Aktuální prostor
-                new String[] { "Varňa", "Dommosklo" },  // Sousedé
-                new String[] { "Pocestný", "Pokladňa",
-                        "Pohár", "Pult", "Stolička" },  // H-objekty
-                new String[] {"Varecha"},   // H-objekty v batohu
-                Map.of("lektvar.naservirovany", false),
-                Map.of("lektvar.naservirovany", true)
-        )
+    new ScenarioStep(tsSUCCESS, "Naservíruj",
+            """
+                    Černokňažník naservíroval Pocestnému: Lektvar
+                    Úspešne ste ukončili hru.
+                    Ďakujeme že ste si ju zahrali.
+                    """,
+            "Zeľuvarenije", // Aktuální prostor
+            new String[] { "Varňa", "Dommosklo" },  // Sousedé
+            new String[] { "Pocestný", "Pokladňa",
+                    "Pohár", "Pult", "Stolička" },  // H-objekty
+            new String[] {"Varecha"},   // H-objekty v batohu
+            Map.of("lektvar.naservirovany", false),
+            Map.of("lektvar.naservirovany", true)
+    )
 );
 
 
