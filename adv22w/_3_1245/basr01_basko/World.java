@@ -100,7 +100,7 @@ private World()
                    "#Pocestný", "_Pokladňa", "_Pohár", "#Pult", "_Stolička"));
     places.add(new Place("Dommosklo",
                    "Dommosklo s ingredienciami:\n" +
-                   "Zamiokulkas, Lopatkovec, Smíchovenec, Afrikule a Šachamašmak",
+               "Zamiokulkas, Lopatkovec, Smíchovenec, Afrikule a Šachamašmak",
                    new String[] {  "Varňa", "Zeľuvarenije" },
                     "_Zamiokulkas", "_Lopatkovec",
                     "_Smíchovenec", "_Afrikule", "_Šachamašmak"));
