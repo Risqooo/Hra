@@ -1,11 +1,11 @@
-package adv22w._3_1245.basr01_basko;
+package adv22w._3_1245.basr01_mistakes;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤ */
 
 import adv22w.api.IAction;
 import adv22w.api.IItem;
 import adv22w.api.INamed;
 
-import static adv22w._3_1245.basr01_basko.Scenarios.*;
+import static adv22w._3_1245.basr01_mistakes.Scenarios.*;
 
 import java.util.*;
 import java.util.function.Function;
