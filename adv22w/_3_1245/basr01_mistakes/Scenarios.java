@@ -28,11 +28,10 @@ public class Scenarios
 
 /** Názvy proměnných s texty vracenými pro jednotlivé typy kroků. */
 static String
-    START, TAKE = "Černokňažník vzal do kapsy objekt: ",
-    GOTO = "Černokňažník sa presunul do priestoru: ",
-    PUT_DOWN = "Černokňažník vybral z kapsy: ",
-    NS_1, NS_0, SUCCESS, HELP,
-    END,
+    START, TAKE = "Vzal si do kapsy: ",
+    GOTO = "Presunul si sa do: ",
+    PUT_DOWN = "Položil si do priestoru: ", //zadefinovat prikazy
+    NS_1, NS_0, SUCCESS, HELP, END,
     NOT_START, EMPTY, UNKNOWN, MOVE_WA, TAKE_WA, PUT_DOWN_WA,
     BAD_NEIGHBOR, BAD_ITEM, UNMOVABLE, BAG_FULL, NOT_IN_BAG,
     NS0_WrongCond, NS1_0Args, NS1_WRONG_ARG, NS1_WrongCond, NOT_SUCCESS
@@ -299,8 +298,8 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
 
 ////////////////////////////////////////////////////////////////////////////////
 private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
-        new ScenarioStep(tsGOTO, "Choď Dommosklo",
-                GOTO +"Dommosklo s ingredienciami:\n" +
+        new ScenarioStep(1, tsGOTO, "Choď Dommosklo",
+                GOTO + "Dommosklo s ingredienciami:\n" +
                 "Zamiokulkas, Lopatkovec, Smíchovenec, Afrikule a Šachamašmak",
                 "Dommosklo",    // Aktuální prostor
                 new String[] { "Varňa", "Zeľuvarenije"},    // Sousedé
@@ -343,8 +342,8 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
 );
 ////////////////////////////////////////////////////////////////////////////
 private static final Scenario MISTAKES = new Scenario(scMISTAKES,
-    new ScenarioStep(-1, tsNOT_START, "Štart",
-        """
+    new ScenarioStep(1, tsNOT_START, "Štart",
+        NOT_START = """
         Prvým príkazom nie je štartovací príkaz.
         Hru, ktorá nebeží, môžeš spustiť iba štartovacím príkazom.
         """,
@@ -354,8 +353,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] {}
     ),
     START_STEP,
-    new ScenarioStep(1, tsEMPTY, "",
-        "Prázdný príkaz sa dá použiť len na spustenie hry",
+    new ScenarioStep(2, tsEMPTY, "",
+        EMPTY = "Prázdný príkaz sa dá použiť len na spustenie hry",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -363,7 +362,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsUNKNOWN, "piko",
-        "Tento příkaz neznám: piko",
+        (UNKNOWN = "Tento příkaz neznám: ") + "piko",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -371,8 +370,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsMOVE_WA, "Choď",
-        "Neviem, kam mám ísť :( . " +
-        "Musíš zadať meno cieľového priestoru.",
+        MOVE_WA + "Musíš zadať meno cieľového priestoru.",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -485,7 +483,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
         "Pohár", "Pult", "Stolička" },  // H-obj. v prostoru
         new String[] { },   // H-objekty v batohu
         Map.of("pocestny.pozdraveny",  true),   //Očekávané příznak
-        null    //Nastavované příznaky
+        Map.of("pocestny.pozdraveny", true)//Nastavované příznaky
         ),
     HAPPY.steps().get(2),   //Choď Dommosklo
     HAPPY.steps().get(3),   //Vezmi Smíchovenec
@@ -496,6 +494,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
     HAPPY.steps().get(8),   //Choď Varňa
     HAPPY.steps().get(9),   //Vezmi Varecha
     HAPPY.steps().get(10),  //Choď studňa
+
     new ScenarioStep(tsNS2_1Args, "Naber vodu",
         "Musíš nabrať čistú vodu",
         "Studňa",   // Aktuální prostor
@@ -504,7 +503,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
         new String[] { "Smíchovenec", "Dračígrc",
         "Šalvia", "Varecha" },  // H-objekty v batohu
         Map.of("voda.nabrata",  false), //Očekávané příznaky
-        null    //Nastavované příznaky
+        Map.of("voda.nabrata",  false)//Nastavované příznaky
         ),
     new ScenarioStep(tsNS2_WRONG_1stARG, "Naber špinavú vodu",
         "Musíš nabrať čistú vodu.",
@@ -514,7 +513,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
         new String[] { "Smíchovenec", "Dračígrc",
                 "Šalvia", "Varecha" },  // H-objekty v batohu
         Map.of("voda.nabrata",  false), //Očekávané příznaky
-        null    //Nastavované příznaky
+        Map.of("voda.nabrata",  false)//Nastavované příznaky
     ),
     new ScenarioStep(tsNS2_WRONG_2ndARG, "Naber čistú pálenku",
         "Musíš nabrať čistú vodu.",
@@ -524,9 +523,10 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
         new String[] { "Smíchovenec", "Dračígrc",
                 "Šalvia", "Varecha" }, // H-objekty v batohu
         Map.of("voda.nabrata",  false), //Očekávané příznaky
-        null   //Nastavované příznaky
+        Map.of("voda.nabrata", false)//Nastavované příznaky
     ),
     HAPPY.steps().get(11),
+
     new ScenarioStep(tsNS2_WrongCond, "Naber čistú vodu",
         "Už si vodu nabral, načo to robiť znova",
         "Studňa",   // Aktuální prostor
@@ -535,7 +535,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
         new String[] { "Smíchovenec", "Dračígrc", "Šalvia",
                 "Varecha", "Voda" },
         Map.of("voda.nabrata",  false), //Očekávané příznaky
-        null    //Nastavované příznaky
+        Map.of("voda.nabrata", true)//Nastavované příznaky
     ),
     HAPPY.steps().get(12),
     HAPPY.steps().get(13),
@@ -550,7 +550,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "Šalvia", "Voda" }, // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("ohen.zapaleny", false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of("ohen.zapaleny", false)// Nastavované příznaky
     ),
     new ScenarioStep(tsNS3_WRONG_2ndARG, "Zapáľ oheň nad kotlom",
             "Musíš zapáliť oheň pod kotlom",
@@ -560,7 +560,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "Šalvia", "Voda" },   // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("ohen.zapaleny", false), //Očekávané příznaky
-            null   // Nastavované příznaky
+            Map.of("ohen.zapaleny", false)// Nastavované příznaky
     ),
     new ScenarioStep(tsNS3_WRONG_3rdARG, "Zapáľ oheň pod sebou",
             "Musíš zapáliť oheň pod kotlom",
@@ -570,7 +570,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "Šalvia", "Voda" }, // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("ohen.zapaleny", false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of("ohen.zapaleny", false)// Nastavované příznaky
     ),
     HAPPY.steps().get(17),
     new ScenarioStep(tsNS1_0Args, "Zamiešaj",
@@ -581,7 +581,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "Šalvia", "Voda"},  // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of("lektvar.zamiesany", false)// Nastavované příznaky
     ),
     new ScenarioStep(tsNS1_WRONG_ARG, "Zamiešaj Kotlík",
             "Musíš zamiešať Lektvar",
@@ -591,7 +591,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "Šalvia", "Voda"},  // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of("lektvar.zamiesany", false)// Nastavované příznaky
     ),
     HAPPY.steps().get(18),
     new ScenarioStep(tsNS1_WrongCond, "Zamiešaj Lektvar",
@@ -601,7 +601,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
             new String[] { "Lektvar" }, // H-objekty
             new String[] {"Varecha"},   // H-objekty v batohu
             Map.of("lektvar.zamiesany", false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of("lektvar.zamiesany", true)// Nastavované příznaky
     ),
     HAPPY.steps().get(19),
     HAPPY.steps().get(20),
@@ -615,11 +615,16 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
             new String[] {"Varecha", "Lektvar"},    // H-objekty v batohu
             Map.of(
                     "pocestny.pozdraveny",  true,
-                    "voda.nabrata",         false,
-                    "ohen.zapaleny",        false,
-                    "lektvar.zamiesany",    false,
+                    "voda.nabrata",         true,
+                    "ohen.zapaleny",        true,
+                    "lektvar.zamiesany",    true,
                     "lektvar.naservirovany",false), //Očekávané příznaky
-            null    // Nastavované příznaky
+            Map.of(
+                    "pocestny.pozdraveny",  true,
+                    "voda.nabrata",         true,
+                    "ohen.zapaleny",        true,
+                    "lektvar.zamiesany",    false,
+                    "lektvar.naservirovany",false)// Nastavované příznaky
     ),
     new ScenarioStep(tsEND, "Koniec",
             "Hru si ukončil príkazom Koniec",

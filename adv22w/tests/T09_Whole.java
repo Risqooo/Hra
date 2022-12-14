@@ -1,6 +1,7 @@
 package adv22w.tests;
 /* Saved in UTF-8 codepage: Příliš žluťoučký kůň úpěl ďábelské ódy. ÷ × ¤ */
 
+import adv22w._3_1245.basr01_mistakes.Portal;
 import adv22w.api.IPortal;
 import adv22w.testers.ASolutionTester;
 import adv22w.testers.Level;
@@ -89,7 +90,7 @@ public class T09_Whole
      */
     public static void main(String[] args)
     {
-        IPortal   portal = null; //new Factory();
+        IPortal   portal = new Portal();
         T09_Whole tester = new T09_Whole();
         tester.test(portal);
         System.exit(0);
