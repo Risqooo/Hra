@@ -28,12 +28,18 @@ public class Scenarios
 
 /** Názvy proměnných s texty vracenými pro jednotlivé typy kroků. */
 static String
-    START, TAKE = "Vzal si do kapsy: ",
-    GOTO = "Presunul si sa do: ",
-    PUT_DOWN = "Položil si do priestoru: ", //zadefinovat prikazy
-    NS_1, NS_0, SUCCESS, HELP, END,
-    NOT_START, EMPTY, UNKNOWN, MOVE_WA, TAKE_WA, PUT_DOWN_WA,
-    BAD_NEIGHBOR, BAD_ITEM, UNMOVABLE, BAG_FULL, NOT_IN_BAG,
+    START = "Vitajte!\n",
+    TAKE = "Černokňažník vzal do kapsy objekt: ",
+    GOTO = "Černokňažník sa presunul do priestoru: ",
+    PUT_DOWN = "Černokňažník vybral z kapsy objekt: ",
+    NS_1 = "Černokňažník zamiešal obsah kotlíka a vyrobil: ",
+    NS_0 = "Černokňažník pozdravil osobu: ",
+    SUCCESS, //definovany na konci HAPPY scenaru
+    HELP, END, //definovane na konci scenaru BASIC
+    NOT_START, EMPTY, UNKNOWN, MOVE_WA, TAKE_WA, //definovane v MISTAKES
+    PUT_DOWN_WA, BAD_NEIGHBOR, BAD_ITEM, UNMOVABLE, //definovane v MISTAKES
+    BAG_FULL = "Zadaný objekt sa už do kapsy nevojde: ",
+    NOT_IN_BAG = "Zadaný objekt nemáš v kapse: ",
     NS0_WrongCond, NS1_0Args, NS1_WRONG_ARG, NS1_WrongCond, NOT_SUCCESS
     ;
 
@@ -61,7 +67,7 @@ Prajeme Vám pekný zážitok z hry.
 /** Společný startovní krok všech scénářů. */
 private static final ScenarioStep START_STEP =
     new ScenarioStep(tsSTART, "",
-        START = "Vitajte!\n" + SUBJECT,
+        START  + SUBJECT,
         "Zeľuvarenije",// Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },// Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár", "Pult", "Stolička" },
@@ -81,7 +87,7 @@ private static final ScenarioStep START_STEP =
 private static final Scenario HAPPY = new Scenario(scHAPPY,
     START_STEP,
     new ScenarioStep(tsNS_0, "Pozdrav",
-            "Černokňažník pozdravil osobu: Pocestný",
+            NS_0 + "Pocestný",
             "Zeľuvarenije",                   // Aktuální prostor
             new String[] { "Varňa", "Dommosklo" },  // Sousedé
             new String[] { "Pocestný", "Pokladňa",
@@ -91,7 +97,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             Map.of("pocestny.pozdraveny",  false) //Nastavené príznaky
     ),
     new ScenarioStep(tsGOTO, "Choď Dommosklo",
-            "Černokňažník sa presunul do priestoru:Dommosklo",
+            GOTO + "Dommosklo",
             "Dommosklo",    // Aktuální prostor
             new String[] { "Varňa", "Zeľuvarenije"},    // Sousedé
             new String[] { "Zamiokulkas", "Lopatkovec",
@@ -99,7 +105,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             new String[] { }                         // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE, "Vezmi Smíchovenec",
-            "Černokňažník vzal do kapsy objekt: Smíchovenec",
+            TAKE + "Smíchovenec",
             "Dommosklo",    // Aktuální prostor
             new String[] { "Varňa", "Zeľuvarenije"},    //Sousedé
             new String[] { "Zamiokulkas", "Lopatkovec",
@@ -107,7 +113,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             new String[] { "Smíchovenec" }  // H-objekty v batohu
     ),
     new ScenarioStep(tsGOTO, "Choď Varňa",
-            "Černokňažník sa presunul do priestoru: Varňa",
+            GOTO + "Varňa",
             "Varňa",    // Aktuální prostor
             new String[] { "Dommosklo", "Zeľuvarenije",
                     "Kotlík", "Špajza", "Studňa"},  // Sousedé
@@ -115,7 +121,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             new String[] { "Smíchovenec" }  // H-objekty v batohu
     ),
     new ScenarioStep(tsGOTO, "Choď Špajza",
-            "Černokňažník sa presunul do priestoru: Špajza",
+            GOTO + "Špajza",
             "Špajza",   // Aktuální prostor
             new String[] {"Varňa"}, // Sousedé
             new String[] { "Dračígrc", "Okomlok", "Šalvia",
@@ -123,7 +129,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             new String[] { "Smíchovenec" }  // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE, "Vezmi Dračígrc",
-            "Černokňažník vzal do kapsy objekt: Dračígrc",
+            TAKE + "Dračígrc",
             "Špajza",   // Aktuální prostor
             new String[] { "Varňa"},    // Sousedé
             new String[] { "Okomlok", "Šalvia",
@@ -131,7 +137,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
             new String[] { "Smíchovenec", "Dračígrc" }  // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE, "Vezmi Šalvia",
-            "Černokňažník vzal do kapsy objekt: Šalvia",
+            TAKE + "Šalvia",
             "Špajza",   // Aktuální prostor
             new String[] { "Varňa"},    // Sousedé
             new String[] { "Okomlok", "Stromohnát",
@@ -140,7 +146,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
                     "Šalvia" }    // H-objekty v batohu
     ),
     new ScenarioStep(tsGOTO, "Choď Varňa",
-            "Černokňažník sa presunul do priestoru: Varňa",
+            GOTO + "Varňa",
             "Varňa",    // Aktuální prostor
             new String[] { "Dommosklo", "Zeľuvarenije",
                     "Kotlík", "Špajza", "Studňa"},  // Sousedé
@@ -149,7 +155,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
                     "Šalvia" }  // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE, "Vezmi Varecha",
-            "Černokňažník vzal do kapsy objekt: Varecha",
+            TAKE + "Varecha",
             "Varňa",    // Aktuální prostor
             new String[] { "Dommosklo", "Zeľuvarenije",
                     "Kotlík", "Špajza", "Studňa"},  // Sousedé
@@ -158,7 +164,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
                     "Šalvia","Varecha" }    // H-objekty v batohu
     ),
     new ScenarioStep(tsGOTO, "Choď Studňa",
-            "Černokňažník sa presunul k: Studňa",
+            GOTO + "Studňa",
             "Studňa",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] {},    // H-objekty
@@ -178,7 +184,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsGOTO, "Choď Kotlík",
-            "Černokňažník sa presunul ku: Kotlík",
+            GOTO + "Kotlík",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] {},    // H-objekty
@@ -187,7 +193,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsPUT_DOWN, "Polož Smíchovenec",
-            "Černokňažník vybral z kapsy: Smíchovenec",
+            PUT_DOWN + "Smíchovenec",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] { "Smíchovenec" }, // H-objekty
@@ -196,7 +202,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsPUT_DOWN, "Polož Dračígrc",
-            "Černokňažník vybral z kapsy: Dračígrc",
+            PUT_DOWN + "Dračígrc",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] { "Smíchovenec", "Dračígrc" }, // H-objekty
@@ -205,7 +211,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsPUT_DOWN, "Polož Šalvia",
-            "Černokňažník vybral z kapsy: Šalvia",
+            PUT_DOWN + "Šalvia",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] { "Smíchovenec", "Dračígrc",
@@ -214,7 +220,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsPUT_DOWN, "Polož Voda",
-            "Černokňažník vybral z kapsy: Voda",
+            PUT_DOWN + "Voda",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] { "Smíchovenec", "Dračígrc",
@@ -234,7 +240,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsNS_1, "Zamiešaj Lektvar",
-            "Černokňažník zamiešal obsah kotlíka a vyrobil: Lektvar",
+            NS_1 + "Lektvar",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] { "Lektvar"},  // H-objekty
@@ -244,7 +250,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsTAKE, "Vezmi Lektvar",
-            "Černokňažník vzal do kapsy objekt: Lektvar",
+            TAKE + "Lektvar",
             "Kotlík",   // Aktuální prostor
             new String[] { "Varňa" },   // Sousedé
             new String[] {},    // H-objekty
@@ -252,7 +258,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsGOTO, "Choď Varňa",
-            "Černokňažník sa presunul do priestoru: Varňa",
+            GOTO + "Varňa",
             "Varňa",    // Aktuální prostor
             new String[] { "Dommosklo", "Zeľuvarenije",
                     "Kotlík", "Špajza", "Studňa"},  // Sousedé
@@ -261,7 +267,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsGOTO, "Choď Zeľuvarenije",
-            "Černokňažník sa presunul do priestoru: Zeľuvarenije",
+            GOTO + "Zeľuvarenije",
             "Zeľuvarenije", // Aktuální prostor
             new String[] { "Varňa", "Dommosklo" },  // Sousedé
             new String[] {"Pocestný", "Pokladňa",
@@ -270,7 +276,7 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     )
     ,
     new ScenarioStep(tsPUT_DOWN, "Polož Lektvar",
-            "Černokňažník vybral z kapsy: Lektvar",
+            PUT_DOWN + "Lektvar",
             "Zeľuvarenije", // Aktuální prostor
             new String[] { "Varňa", "Dommosklo" },  // Sousedé
             new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -280,11 +286,11 @@ private static final Scenario HAPPY = new Scenario(scHAPPY,
     ,
 
     new ScenarioStep(tsSUCCESS, "Naservíruj",
-            """
-                    Černokňažník naservíroval Pocestnému: Lektvar
+            (SUCCESS = """
+                    Černokňažník naservíroval Pocestnému Lektvar.
                     Úspešne ste ukončili hru.
                     Ďakujeme že ste si ju zahrali.
-                    """,
+                    """),
             "Zeľuvarenije", // Aktuální prostor
             new String[] { "Varňa", "Dommosklo" },  // Sousedé
             new String[] { "Pocestný", "Pokladňa",
@@ -324,7 +330,7 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
                 new String[] { }    // H-objekty v batohu
         ),
         new ScenarioStep(tsHELP, "?",
-                HELP = SUBJECT + "Môžeš zadať tieto príkazy: ",
+                (HELP = SUBJECT + "Môžeš zadať tieto príkazy: "),
                 "Dommosklo",    // Aktuální prostor
                 new String[] { "Varňa", "Zeľuvarenije" },   // Sousedé
                 new String[] { "Zamiokulkas", "Lopatkovec", "Smíchovenec",
@@ -332,7 +338,7 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
                 new String[] { }    // H-objekty v batohu
         ),
         new ScenarioStep(tsEND, "Koniec",
-                END = "Hru si ukončil príkazom: Koniec",
+                (END = "Hru si ukončil príkazom: Koniec"),
                 "Dommosklo",    // Aktuální prostor
                 new String[] { "Varňa", "Zeľuvarenije" },   // Sousedé
                 new String[] { "Zamiokulkas", "Lopatkovec", "Smíchovenec",
@@ -343,10 +349,10 @@ private static final Scenario BASIC = new Scenario(scBASIC, START_STEP,
 ////////////////////////////////////////////////////////////////////////////
 private static final Scenario MISTAKES = new Scenario(scMISTAKES,
     new ScenarioStep(1, tsNOT_START, "Štart",
-        NOT_START = """
+        (NOT_START = """
         Prvým príkazom nie je štartovací príkaz.
         Hru, ktorá nebeží, môžeš spustiť iba štartovacím príkazom.
-        """,
+        """),
         "",
         new String[] {},
         new String[] {},
@@ -354,7 +360,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
     ),
     START_STEP,
     new ScenarioStep(2, tsEMPTY, "",
-        EMPTY = "Prázdný príkaz sa dá použiť len na spustenie hry",
+        (EMPTY = "Prázdný príkaz sa dá použiť len na spustenie hry"),
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -362,7 +368,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsUNKNOWN, "piko",
-        (UNKNOWN = "Tento příkaz neznám: ") + "piko",
+        (UNKNOWN = "Tento príkaz nepoznám: ") + "piko",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -370,7 +376,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsMOVE_WA, "Choď",
-        MOVE_WA + "Musíš zadať meno cieľového priestoru.",
+        (MOVE_WA = "Musíš zadať meno cieľového priestoru."),
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -378,7 +384,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE_WA, "Vezmi",
-        "Neviem, čo mám zdvihnúť. Musíš zadaž meno objektu.",
+        (TAKE_WA = "Neviem, čo mám zdvihnúť. Musíš zadaž meno objektu."),
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -386,7 +392,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsPUT_DOWN_WA, "Polož",
-        "Neviem, čo mám položiť. Musíš zadat meno objektu.",
+        (PUT_DOWN_WA = "Neviem, čo mám položiť. Musíš zadat meno objektu."),
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -394,7 +400,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsBAD_NEIGHBOR, "Choď Šakesikatameles",
-        "Do zadaného priestoru sa odtiaľto nedá ísť: Šakesikatameles",
+(BAD_NEIGHBOR = "Do zadaného priestoru sa odtiaľto nedá ísť: ")
+                +"Šakesikatameles",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -402,7 +409,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsBAD_ITEM, "Vezmi Mixér",
-        "Zadaný objekt v priestore nie je: Mixér",
+(BAD_ITEM = "Zadaný objekt v priestore nie je: ")
+            + "Mixér",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -410,7 +418,8 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsUNMOVABLE, "Vezmi Pult",
-        "Zadaný objekt nemôžeš zdvihnúť: Pult",
+(UNMOVABLE = "Zadaný objekt nemôžeš zdvihnúť: ")
+            + "Pult",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa", "Pohár",
@@ -418,7 +427,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { }    // H-objekty v batohu
     ),
     new ScenarioStep(tsTAKE, "Vezmi Pohár",
-        "Černokňažník vzal do kapsy objekt: Pohár",
+        TAKE + "Pohár",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný", "Pokladňa",
@@ -427,7 +436,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
     )
     ,
     new ScenarioStep(tsTAKE, "Vezmi Pokladňa",
-        "Černokňažník vzal do kapsy objekt: Pokladňa",
+        TAKE + "Pokladňa",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný",  "Pult",
@@ -435,7 +444,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { "Pokladňa", "Pohár" }    // H-objekty v batohu
     ),
     new ScenarioStep(tsBAG_FULL, "Vezmi Stolička",
-        "Zadaný objekt sa už do kapsy nevojde: Stolička",
+        BAG_FULL + "Stolička",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný",  "Pult",
@@ -443,7 +452,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { "Pokladňa", "Pohár"} // H-objekty v batohu
     ),
     new ScenarioStep(tsNOT_IN_BAG, "Polož Stolička",
-        "Zadaný objekt nemáš v kapse: Stolička",
+        NOT_IN_BAG + "Stolička",
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný",  "Pult",
@@ -451,11 +460,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { "Pokladňa", "Pohár"} // H-objekty v batohu
     ),
     new ScenarioStep(tsHELP, "?",
-        """
-        Tvojou úlohou je navariť Pocestnému  ten správny lektvar.
-                 
-        Môžeš zadať tieto príkazy:
-        """,
+        HELP,
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný",  "Pult",
@@ -463,7 +468,7 @@ private static final Scenario MISTAKES = new Scenario(scMISTAKES,
         new String[] { "Pokladňa", "Pohár"} // H-objekty v batohu
     ),
     new ScenarioStep(tsEND, "Koniec",
-        "Hru si ukončil príkazom Koniec",
+        END,
         "Zeľuvarenije", // Aktuální prostor
         new String[] { "Varňa", "Dommosklo" },  // Sousedé
         new String[] { "Pocestný",  "Pult",
@@ -627,7 +632,7 @@ private static final Scenario MISTAKES_NS  = new Scenario(scMISTAKES_NS,
                     "lektvar.naservirovany",false)// Nastavované příznaky
     ),
     new ScenarioStep(tsEND, "Koniec",
-            "Hru si ukončil príkazom Koniec",
+            END,
             "Zeľuvarenije", // Aktuální prostor
             new String[] { "Varňa", "Dommosklo" },  // Sousedé
             new String[] { "Pocestný", "Pokladňa", "Pohár",
