@@ -106,11 +106,12 @@ public class    Action
     {
         World.getInstance().initialize();
         Bag  .getInstance().initialize();
-        conditions.put("living", List.of("babička", "vlk"));
-        conditions.put("babička.sleeping", true);
-        conditions.put("babička.greeted",  false);
-        conditions.put("vlk.sleeping", true);
-        conditions.put("vlk.greeted",  false);
+        conditions.put("living", List.of("pocestny"));
+        conditions.put("pocestny.pozdraveny", false);
+        conditions.put("voda.nabrata", false);
+        conditions.put("ohen.zapaleny", false);
+        conditions.put("lektvar.zamiesany", false);
+        conditions.put("lektvar.naservirovany", false);
     }
 
 
@@ -246,7 +247,7 @@ public class    Action
 static {
 NAME_2_ACTION = Map.of(
     "choď", new Action("Choď",
-        "Přesune Karkulku do zadaného sousedního prostoru.",
+        "Presunie Černokňažníka do zadaného susedného priestoru.",
         arguments -> {
             if (arguments.length < 2) {
                 return MOVE_WA;
@@ -264,9 +265,9 @@ NAME_2_ACTION = Map.of(
             return GOTO + destinationRoom.description();
         }),
     "vezmi", new Action("Vezmi",
-        "Vezme zadaný předmět a vloží jej do košíku.\n"
-      + "Předmět ale musí být v aktuálním prostoru, musí být přenositelný\n"
-      + "a v košíku pro něj musí být volné místo.",
+        "Vezme zadaný predmet a vloží ho do kapsy.\n"
+      + "Predmet musí byť v aktuálnom priestore, prenesiteľný\n"
+      + "a musí sa zmestiť do kapsy.",
         arguments -> {
             if (arguments.length <2) {
                 return TAKE_WA;
@@ -293,7 +294,7 @@ NAME_2_ACTION = Map.of(
             }
         }),
     "polož", new Action("Polož",
-        "Zadaný předmět z košíku položí v aktuálním prostoru.",
+        "Zadaný predmet z kapsy položí v aktuálnom priestore.",
         arguments -> {
             if (arguments.length < 2) {
                 return PUT_DOWN_WA;
@@ -311,7 +312,7 @@ NAME_2_ACTION = Map.of(
             return PUT_DOWN + item.name();
         }),
     "?", new Action("?",
-        "Zobrazí seznam dostupných akcí spolu s jejich stručnými popisy.",
+        "Zobrazí zoznam dostupných akcií spolu s ich stručnými popismi.",
         arguments -> {
             Collection<Action> actions = allActions();
 //        Collector col = Collectors.joining(
@@ -334,9 +335,9 @@ NAME_2_ACTION = Map.of(
             Game.getInstance().stop();
             return END;
         }),
-    "probuď", new Action("Probuď",
-        "Karkulka probudí zadaný h-objekt (osobu, zvíře).\n"
-      + "Objekt musí být v aktuálním prostoru a musí spát.",
+    "pozdrav", new Action("Pozdrav",
+        "Černokňažník pozdraví zadaný h-objekt (osobu).\n"
+      + "Objekt musí byť v aktuálnom priestore.",
         arguments -> {
             if (arguments.length < 2) {
                 return NS1_0Args;
@@ -354,55 +355,55 @@ NAME_2_ACTION = Map.of(
             if (! ((List)(conditions.get("living"))).contains(name)) {
                 return NS1_WRONG_ARG + item;
             }
-            String cond = name+".sleeping";
+            String cond = name+".pozdraveny";
             if ((Boolean)(conditions.get(cond))) {
-                conditions.put(cond, false);
-                return NS_1 + name;
+                conditions.put(cond, true);
+                return NS_0 + "Pocestný";
             }
-            return NS1_WrongCond + name;
+            return NS0_WrongCond + name;
         }),
+/*
     "pozdrav", new Action("Pozdrav",
-        "Karkulka pozdraví. Příkaz je bezparametrický,\n"
-      + "ale v aktuálním prostoru musí být probuzený objekt.",
+        "Černokňažník pozdraví. Príkaz je bezparametrický,\n"
+      + "ale v aktuálnom priestore musí byť Pocestný",
         arguments -> {
             World        world = World.getInstance();
             Place currentPlace = world.currentPlace();
             Optional<IItem> oItem = getiItem(currentPlace);
             if (oItem.isEmpty()) {
-                return "V prostoru není nikdo, koho by mělo smysl zdravit";
+                return "Černokňažník pozdravil osobu: Pocestný";
             }
             Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
-            String  cond = name+".sleeping";
+            String  cond = name+".pozdraveny";
             if ((Boolean)(conditions.get(cond))) {
                 return NS0_WrongCond;
             }
-            cond = name+".greeted";
-            if ((Boolean)(conditions.get(cond))) {
-                return NS1_WrongCond;
-            }
             conditions.put(cond, true);
             return NS_0;
-
         }),
-    "popřej", new Action("Popřej",
-        "Karkulka popřeje k narozeninám. Příkaz je bezparametrický,\n"
-      + "ale v aktuálním prostoru musí být pozdravený h-objekt.",
+ */
+
+    "naservíruj", new Action("Naservíruj",
+        "Černokňažník naservíruje lektvar. Príkaz je bezparametrický,\n"
+      + "ale v aktuálnom priestore musí byť Pocestný" +
+        "a v kapse musíš mať lektvar",
         arguments -> {
             World        world = World.getInstance();
             Place currentPlace = world.currentPlace();
             Optional<IItem> oItem = getiItem(currentPlace);
             if (oItem.isEmpty()) {
-                return "V prostoru není nikdo, komu by mělo smysl přát";
+                return "Nemáš komu alebo čo naservírovať";
             }
             Item item = (Item)oItem.get();
             String  name = item.name().toLowerCase();
-            String  cond = name+".greeted";
+            String  cond = name+".naservirovany";
             if ((Boolean)(conditions.get(cond))) {
                 return SUCCESS;
             }
             return NOT_SUCCESS;
         })
+
 );  // Konec definice mapy
 } // Konec konstruktoru třídy
 }

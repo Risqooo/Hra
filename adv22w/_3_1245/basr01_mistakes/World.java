@@ -105,13 +105,13 @@ private World()
                     "_Zamiokulkas", "_Lopatkovec",
                     "_Smíchovenec", "_Afrikule", "_Šachamašmak"));
     places.add(new Place("Varňa",
-                   "Varňa v ktorej je: " +
+                   "Varňa v ktorej je:\n" +
                            "Špajza, Kotlík a Studňa",
                    new String[] { "Dommosklo", "Zeľuvarenije",
                            "Kotlík", "Špajza", "Studňa"},
                    "_Varecha"));
     places.add(new Place("Špajza",
-                   "Špajza v ktorej sa nachádza: " +
+                   "Špajza v ktorej sa nachádza:\n" +
                            "Dračígrc, Okomlok, Šalvia" +
                            "Stromohnát a Rumbagule",
                    new String[] { "Varňa" },
